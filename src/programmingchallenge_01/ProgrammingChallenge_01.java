@@ -52,7 +52,8 @@ public class ProgrammingChallenge_01 {
                                     {"1" , "2", "3", "4", "5", "6" ,"7", "8", "9", "10"},
                                     {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}};
 
-        ArrayList<Integer> randomGenerated = new ArrayList<Integer>();                       
+        ArrayList<Integer> randomGenerated = new ArrayList<Integer>();      
+        ArrayList<Integer> randomAnswers = new ArrayList<Integer>();                
 
         final String LOWANS = "The user answered from  0% to 33% of the questions correctly.";
         final String MEDLOWANS = "The user answered from  34% to 66% of the questions correctly.";
@@ -63,12 +64,12 @@ public class ProgrammingChallenge_01 {
         final String CAT2 = "CATEGORY 2";
         final String CAT3 = "CATEGORY 3";
 
-        String validAns;
+        
         String answer;
         String playAgain;
 
         final int VAL_POINTS = 10;
-        final int VAL_EXTRAPOINTS = 15;
+        final int VAL_EXTRAPOINTS = 20;
 
         int randomQ;
 
@@ -89,12 +90,13 @@ public class ProgrammingChallenge_01 {
             int consecutiveCorr = 0;
 
             String cat[][];
-            String catType = "Not especified";
+            String catName = "Not especified";
 
             int i = 0;
             boolean endGame = false; 
             boolean validCat = false;
             System.out.println("\n------Select category------\n1."+CAT1+"\n2."+CAT2+"\n2."+CAT3+"\n---------------------------");
+           
             do {
                 Scanner catIn = new Scanner(System.in);
                 categroy = catIn.nextInt();
@@ -108,15 +110,15 @@ public class ProgrammingChallenge_01 {
             switch (categroy) {
                 case 1:
                     cat = QANDA1;
-                    catType = CAT1;
+                    catName = CAT1;
                     break;
                 case 2:
                     cat = QANDA2;
-                    catType =CAT2;
+                    catName =CAT2;
                     break;
                 case 3:
                     cat = QANDA3;
-                    catType = CAT3;
+                    catName = CAT3;
                     break;
                 default:
                      cat = QANDA1;
@@ -136,16 +138,50 @@ public class ProgrammingChallenge_01 {
                     } while (!validNum);
 
                 randomGenerated.add(randomQ);
- 
                 System.out.println("\n" + cat[0][randomQ]);
-                if (cat == QANDA1) {
-                    
+
+                String testA="";
+                String testB="";
+                String testC="";
+
+                while (cat == QANDA1 && randomAnswers.size()<= 2) {
+                    Random r = new Random();
+                    int randomA = r.nextInt(1,4);
+                    if (randomAnswers.contains(randomA)){
+                    } else {
+                        switch(randomAnswers.size()){
+                            case 0:
+                            testA = cat[randomA][randomQ];
+                            System.out.print("A) "+testA+"   ");
+                            break;
+                            case 1:
+                            testB = cat[randomA][randomQ];
+                            System.out.print("B) "+testB+"   ");
+                            break;
+                            case 2:
+                            testC = cat[randomA][randomQ];
+                            System.out.print("C) "+testC+"   ");
+                            break;
+                        }
+                        randomAnswers.add(randomA);
+                    }
                 }
-                System.out.println("A:");
-                
+                randomAnswers.clear();
+                System.out.println();
                 Scanner answerIn = new Scanner(System.in);
                 answer = answerIn.nextLine().toLowerCase();
                 
+                switch(answer){
+                    case "a":
+                    answer = testA;
+                    break;
+                    case "b":
+                    answer = testB;
+                    break;
+                    case "c":
+                    answer = testC;
+                }
+
                 if (answer.equals("yes") || answer.equals("y")) {
                     answer = "yes";
                 } else if (answer.equals("no") || answer.equals("n"))
@@ -153,11 +189,16 @@ public class ProgrammingChallenge_01 {
 
                 int j = 1;
                 int itsCorrect = 0; //1= correct 0 = incorrect
+                String validAns;
                 boolean correctAns = false;
-                
+
                 while (j < cat.length && !correctAns) { //better??
+                    if (cat == QANDA1){
+                        validAns = cat[1][randomQ];
+                    }else{
+                        validAns = cat[j][randomQ];
+                    }
                     
-                    validAns = cat[j][randomQ];
 
                     if (validAns.equals(answer)){
                         itsCorrect = 1;
@@ -195,11 +236,12 @@ public class ProgrammingChallenge_01 {
                 }
             }
             randomGenerated.clear();
+            randomAnswers.clear();
             
             int score = extraPoints + normalCorr*VAL_POINTS;
             System.out.println();
             System.out.println(ConsoleColors.RED+"*--------------------------*\n           GAME OVER\n*--------------------------*"+ConsoleColors.RESET);
-            System.out.println("*Category: "+ catType);
+            System.out.println("*Category: "+ catName);
             System.out.println("\nCorrect answers: "+ConsoleColors.GREEN+correctCount+ConsoleColors.RESET+"\nIncorrect answers: "+ConsoleColors.RED+incorrectCount+ConsoleColors.RESET);
             System.out.println(ConsoleColors.GREEN_BOLD+"\nScore: "+ score + " points"+ConsoleColors.RESET);
 
