@@ -1,6 +1,7 @@
 package programmingchallenge_01;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class ProgrammingChallenge_01 {
                                      "Who saved Jayce and her mother when he was a little boy?",
                                      "Wich character have a pocket watch?",
                                      "Witch Jinx's weapons use the gemstone to upgrade it's power?",
-                                     "What adjustment engineer did Jayce and Viktor made to control the Hexcores? ",
+                                     "What adjustment engineer did Jayce and Viktor made to control the Hexcores?",
                                      "Question 8",
                                      "Question 9",
                                      "Question 10"},
@@ -51,6 +52,8 @@ public class ProgrammingChallenge_01 {
                                     {"1" , "2", "3", "4", "5", "6" ,"7", "8", "9", "10"},
                                     {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}};
 
+        final String userQANDA [][] = new String [3] [9];
+
         //NON-REPEATED RANDOM VALUES ARRAY
         ArrayList<Integer> randomGenerated = new ArrayList<Integer>();      
         ArrayList<Integer> randomAnswers = new ArrayList<Integer>();                
@@ -75,7 +78,7 @@ public class ProgrammingChallenge_01 {
         final int VAL_EXTRAPOINTS = 20;
 
         int randomQ;
-        int categroy; 
+        int categroy=0; 
 
         int extraPoints = 0;
 
@@ -89,7 +92,7 @@ public class ProgrammingChallenge_01 {
         int gameCounter = 0;
 
         boolean keepPlaying = true;
-        boolean validCat = false;
+        
 
          
         
@@ -101,13 +104,18 @@ public class ProgrammingChallenge_01 {
                 ConsoleColors.PURPLE_BOLD_BRIGHT+"\n2."+CAT3+ConsoleColors.RESET+
                 "\n---------------------------");
             //VALID CAT INPUT
+            boolean validCat = false;
             do {
                 Scanner catIn = new Scanner(System.in);
-                categroy = catIn.nextInt();
-                if (categroy > 0 && categroy <=3){
+                if (!catIn.hasNextInt()){
+                    System.out.println("Input error.\nEnter a number to select the category:");
+                }else {
+                    categroy = catIn.nextInt();
+                    if (categroy > 0 && categroy <=3){
                     validCat = true;
-                } else {
+                    } else{
                     System.out.println("Error. You need to choose a category (1, 2 or 3)");
+                    }
                 }
             }while(!validCat);
 
@@ -265,14 +273,97 @@ public class ProgrammingChallenge_01 {
                 System.out.println(HIGHANS);
             }
 
-            // PLAY AGAIN
-            System.out.println("\nDo you want to play again?\nY/N");
-            Scanner againIn = new Scanner(System.in);
-            String playAgain = againIn.nextLine().toLowerCase();
+            // OPTIONS
+            
+            boolean validOption = true;
+            int option;
+            do {
+                System.out.println("\nOptions:\n1. Play again.\n2. Questions mod /new quizz\n3. Exit game");
+                Scanner optionsIScanner = new Scanner(System.in);
+                    option = optionsIScanner.nextInt();
+                if (option < 1 || option > 3 ){
+                    validOption = false;
+                }
+            }while (!validOption);
 
-            if (playAgain.equals("n") || playAgain.equals("no")){
+            boolean modValidIn = true;
+            char mod='e';
+            switch(option){
+                case 1:
+                keepPlaying = true;
+                break;
+
+                case 2:
+                System.out.println("\n2. Select your mod:\na)Modify a quizz\nb)Create a new quizz");
+                do {
+                    Scanner modIn = new Scanner(System.in);
+                    mod = modIn.next().charAt(0);
+                    if (mod !='a' || mod !='b'){  
+                    }else{
+                        System.out.println("Error. Invalid input.");
+                        modValidIn = false;
+                    }
+                } while (!modValidIn);
+                break;
+
+                case 3:
                 keepPlaying = false;
                 System.out.println("See you next time!");
+                break;
+            }
+            if(mod == 'a') {
+                System.out.println("Select the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
+                ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
+                ConsoleColors.PURPLE_BOLD_BRIGHT+"\n2."+CAT3+ConsoleColors.RESET);
+                boolean validOptionCat = true;
+                int catOption;
+                do {
+                    Scanner catOptionIn = new Scanner(System.in);
+                    catOption = catOptionIn.nextInt();
+                    if (catOption == 1){
+                        cat = QANDA1;
+                    }else if (catOption == 2){
+                        cat = QANDA2;
+                    }else if(catOption == 3){
+                        cat = QANDA3;
+                    }else{
+                        System.out.println("Error. Invalid input.");
+                        validOption = false;
+                    }
+                } while (!validOptionCat);
+                System.out.println();
+                for (int j= 0; j < cat[0].length; j++){
+                    int k = j+1;
+                    System.out.println(k+". "+cat[0][j]);
+                }
+                System.out.println("\nNumber of question to modify:");
+                Scanner r = new Scanner(System.in);
+                int questionNum = r.nextInt();
+                System.out.println("Type the new question:");
+                Scanner s = new Scanner(System.in);
+                String newQuestion = s.nextLine();
+                cat[0][questionNum-1] = newQuestion;
+                
+            } else if (mod == 'b') {
+                for (int q = 0; q < userQANDA[0].length; q++){
+                    int qn = q+1;
+                    System.out.println("Type question nº "+qn+":");
+                    Scanner a = new Scanner(System.in);
+                    String newQuizz = a.nextLine();
+                    userQANDA[0][q] = newQuizz;
+                    for (int w = 1; w < 4;w++){
+                        System.out.println("Type the correct answer:");
+                        Scanner e = new Scanner(System.in);
+                        String uCorrectAnswer = e.nextLine();
+                        userQANDA[w][q] = uCorrectAnswer;
+                    }
+                }
+            }
+            System.out.println("\n\nPlay again?\nY/N");
+            Scanner playAgainIn = new Scanner(System.in);
+            String playAgain = playAgainIn.nextLine().toLowerCase();
+            if (playAgain.equals("n") || playAgain.equals("no")){
+                keepPlaying = false;
             }
         }
     }
