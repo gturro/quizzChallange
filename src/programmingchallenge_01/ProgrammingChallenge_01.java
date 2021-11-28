@@ -1,7 +1,6 @@
 package programmingchallenge_01;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -338,21 +337,41 @@ public class ProgrammingChallenge_01 {
                 }
                 System.out.println("\nNumber of question to modify:");
                 Scanner r = new Scanner(System.in);
-                int questionNum = r.nextInt();
+                int questionNum = r.nextInt()-1;
+
                 System.out.println("Type the new question:");
                 Scanner s = new Scanner(System.in);
                 String newQuestion = s.nextLine();
-                cat[0][questionNum-1] = newQuestion;
-                
+                cat[0][questionNum] = newQuestion;
+
+                System.out.println("Do you want to modify the answers?\nY/N");
+                Scanner ansModIn = new Scanner(System.in);
+                String answersMod = ansModIn.nextLine().toLowerCase();
+
+                if (answersMod.equals("y")||answersMod.equals("yes")){
+                    for (int m = 1; m < 3; m++){
+                        System.out.println("Type new answer:");
+                        Scanner t = new Scanner(System.in);
+                        String modAnswer = t.nextLine();
+                        userQANDA[m][questionNum] = modAnswer;
+                    }
+                }
+
+
             } else if (mod == 'b') {
                 for (int q = 0; q < userQANDA[0].length; q++){
                     int qn = q+1;
-                    System.out.println("Type question nº "+qn+":");
+                    System.out.println("\nQuestion nº "+qn+":");
                     Scanner a = new Scanner(System.in);
                     String newQuizz = a.nextLine();
                     userQANDA[0][q] = newQuizz;
-                    for (int w = 1; w < 4;w++){
-                        System.out.println("Type the correct answer:");
+                    for (int w = 1; w < 3;w++){
+                        if(w==1){
+                            System.out.println("\nType the correct answer:");
+                        }else{
+                            System.out.println("\nType a false answer:");
+                        }
+                        
                         Scanner e = new Scanner(System.in);
                         String uCorrectAnswer = e.nextLine();
                         userQANDA[w][q] = uCorrectAnswer;
