@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class ProgrammingChallenge_01 {
 
+    
+
     public static void main(String[] args) {
 
         //CATEGORY 1
@@ -51,7 +53,7 @@ public class ProgrammingChallenge_01 {
                                     {"1" , "2", "3", "4", "5", "6" ,"7", "8", "9", "10"},
                                     {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}};
 
-        final String userQANDA [][] = new String [3] [9];
+        final String userQANDA [][] = new String [4] [10];
 
         //NON-REPEATED RANDOM VALUES ARRAY
         ArrayList<Integer> randomGenerated = new ArrayList<Integer>();      
@@ -88,7 +90,6 @@ public class ProgrammingChallenge_01 {
         int consecutiveErrors = 0;
         int consecutiveCorr = 0;
 
-        int gameCounter = 0;
 
         boolean keepPlaying = true;
         
@@ -144,7 +145,8 @@ public class ProgrammingChallenge_01 {
                     } while (randomGenerated.contains(randomQ));
 
                 randomGenerated.add(randomQ);
-                System.out.println("\n" + cat[0][randomQ]);
+                //QUESTION PRINT
+                System.out.println(ConsoleColors.CYAN_BOLD+"\n" + cat[0][randomQ]+ConsoleColors.RESET);
                 System.out.println();
                 // RANDOM DISPLAY TIPO TEST
                 String testA="";
@@ -153,7 +155,7 @@ public class ProgrammingChallenge_01 {
 
                 while (cat == QANDA1 && randomAnswers.size()<= 2) { //add cat to display test abc.
                     Random r = new Random();
-                    int randomA = r.nextInt(1,4);
+                    int randomA = r.nextInt(3)+1;//genera (0...n-1) +1
 
                     if (!randomAnswers.contains(randomA)){
                         switch(randomAnswers.size()){
@@ -180,6 +182,7 @@ public class ProgrammingChallenge_01 {
                 answer = answerIn.nextLine().toLowerCase();
                 
                 // ANSWER AUTOMOD
+                //TIPO TEST
                 switch(answer){
                     case "a":
                     answer = testA;
@@ -190,15 +193,16 @@ public class ProgrammingChallenge_01 {
                     case "c":
                     answer = testC;
                 }
-                if (answer.equals("yes")) {
-                    answer = "y";
-                } else if (answer.equals("no"))
-                    answer = "n";
+                // Y/N ANSWERS
+                if (answer.equals("y")) {
+                    answer = "yes";
+                } else if (answer.equals("n"))
+                    answer = "no";
 
-                
                 int itsCorrect = 0; //1= correct 0 = incorrect
                 String validAns;
                 boolean correctAns = false;
+
                 // ANS VALIDATION
                 int j = 1;
                 while (j < cat.length && !correctAns) {
@@ -236,28 +240,26 @@ public class ProgrammingChallenge_01 {
                     normalCorr -= consecutiveCorr;
                     consecutiveCorr = 0;
                 }
-                gameCounter++;
 
-                // GAME OVER CONDITIONS
-                if (gameCounter >= cat[0].length) {
+                // GAME OVER CONDITION
+                if (consecutiveErrors >= 3) {
                     endGame = true;
-                } else if (consecutiveErrors >= 3) {
-                    endGame = true;
-                    System.out.println("\nYou failed 3 questions in a row...\nGood luck next time!");
+                    System.out.println(ConsoleColors.RED_BRIGHT+"\nYou failed 3 questions in a row..."+ConsoleColors.RESET);
                 }
             }
+            consecutiveErrors = 0;
             randomGenerated.clear();
             randomAnswers.clear();
 
             // CORRECT INCORRECT SCORE
             int score = extraPoints + normalCorr*VAL_POINTS;
-            System.out.println();
-            System.out.println(ConsoleColors.RED+"*--------------------------*\n           GAME OVER\n*--------------------------*"+ConsoleColors.RESET);
-            System.out.println("*Category: "+ catName);
+            System.out.println();                  
+            System.out.println(ConsoleColors.RED+"*==========================*\n           GAME OVER\n*==========================*"+ConsoleColors.RESET);
+            System.out.println("\nCategory: "+ catName);
             System.out.println("\nCorrect answers: "+ConsoleColors.GREEN+correctCount+ConsoleColors.RESET+"\nIncorrect answers: "+ConsoleColors.RED+incorrectCount+ConsoleColors.RESET);
             System.out.println(ConsoleColors.GREEN_BOLD+"\nScore: "+ score + " points"+ConsoleColors.RESET);
 
-            // PERCENTAGE
+            // CORRECT PERCENTAGE
             Double correctPerc = (double)(correctCount*100)/QANDA1[0].length;
 
             System.out.println("\nPercentage: "+correctPerc+"%");
@@ -273,11 +275,10 @@ public class ProgrammingChallenge_01 {
             }
 
             // OPTIONS
-            
             boolean validOption = true;
             int option;
             do {
-                System.out.println("\nOptions:\n1. Play again.\n2. Questions mod /new quizz\n3. Exit game");
+                System.out.println(ConsoleColors.YELLOW+"\nOptions:"+ConsoleColors.RESET+"\n1. Play again.\n2. Questions mod / new quizz\n3. Exit game");
                 Scanner optionsIScanner = new Scanner(System.in);
                     option = optionsIScanner.nextInt();
                 if (option < 1 || option > 3 ){
@@ -286,18 +287,19 @@ public class ProgrammingChallenge_01 {
             }while (!validOption);
 
             boolean modValidIn = true;
-            char mod='e';
+            int mod=0;
+
             switch(option){
                 case 1:
                 keepPlaying = true;
                 break;
 
                 case 2:
-                System.out.println("\n2. Select your mod:\na)Modify a quizz\nb)Create a new quizz");
+                System.out.println(ConsoleColors.YELLOW+"\n2. Select your mod:"+ConsoleColors.RESET+"\n1. Modify a quizz\n2. Create a new quizz");
                 do {
                     Scanner modIn = new Scanner(System.in);
-                    mod = modIn.next().charAt(0);
-                    if (mod !='a' || mod !='b'){  
+                    mod = modIn.nextInt();
+                    if (mod != 1 || mod !=2){ 
                     }else{
                         System.out.println("Error. Invalid input.");
                         modValidIn = false;
@@ -310,8 +312,8 @@ public class ProgrammingChallenge_01 {
                 System.out.println("See you next time!");
                 break;
             }
-            if(mod == 'a') {
-                System.out.println("Select the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
+            if(mod == 1) {
+                System.out.println("\nSelect the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
                 ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
                 ConsoleColors.PURPLE_BOLD_BRIGHT+"\n2."+CAT3+ConsoleColors.RESET);
                 boolean validOptionCat = true;
@@ -331,11 +333,12 @@ public class ProgrammingChallenge_01 {
                     }
                 } while (!validOptionCat);
                 System.out.println();
+                System.out.println("\nNumber of question to modify:");
                 for (int j= 0; j < cat[0].length; j++){
                     int k = j+1;
                     System.out.println(k+". "+cat[0][j]);
                 }
-                System.out.println("\nNumber of question to modify:");
+                
                 Scanner r = new Scanner(System.in);
                 int questionNum = r.nextInt()-1;
 
@@ -349,23 +352,23 @@ public class ProgrammingChallenge_01 {
                 String answersMod = ansModIn.nextLine().toLowerCase();
 
                 if (answersMod.equals("y")||answersMod.equals("yes")){
-                    for (int m = 1; m < 3; m++){
+                    for (int m = 1; m <= 3; m++){
                         System.out.println("Type new answer:");
                         Scanner t = new Scanner(System.in);
                         String modAnswer = t.nextLine();
                         userQANDA[m][questionNum] = modAnswer;
                     }
                 }
+                askPlayAgain();
 
-
-            } else if (mod == 'b') {
+            } else if (mod == 2) {
                 for (int q = 0; q < userQANDA[0].length; q++){
                     int qn = q+1;
-                    System.out.println("\nQuestion nº "+qn+":");
+                    System.out.println("\n\nQuestion nº "+qn+":");
                     Scanner a = new Scanner(System.in);
                     String newQuizz = a.nextLine();
                     userQANDA[0][q] = newQuizz;
-                    for (int w = 1; w < 3;w++){
+                    for (int w = 1; w <= 3;w++){
                         if(w==1){
                             System.out.println("\nType the correct answer:");
                         }else{
@@ -377,13 +380,18 @@ public class ProgrammingChallenge_01 {
                         userQANDA[w][q] = uCorrectAnswer;
                     }
                 }
-            }
-            System.out.println("\n\nPlay again?\nY/N");
-            Scanner playAgainIn = new Scanner(System.in);
-            String playAgain = playAgainIn.nextLine().toLowerCase();
-            if (playAgain.equals("n") || playAgain.equals("no")){
-                keepPlaying = false;
+                askPlayAgain();
             }
         }
+    }
+    public static boolean askPlayAgain(){
+        boolean keepPlaying = true;
+        System.out.println("\n\nPlay again?\nY/N");
+        Scanner playAgainIn = new Scanner(System.in);
+        String playAgain = playAgainIn.nextLine().toLowerCase();
+        if (playAgain.equals("n") || playAgain.equals("no")){
+            keepPlaying = false;
+        }
+        return keepPlaying;
     }
 }
