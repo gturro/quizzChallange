@@ -59,7 +59,7 @@ public class ProgrammingChallenge_01 {
         final static String CAT1 = "Arcane serie";
         final static String CAT2 = "CATEGORY 2";
         final static String CAT3 = "CATEGORY 3";
-
+        //NEW USER ARRAY
         final static String userQANDA [][] = new String [4] [10];
 		
 		static boolean keepPlaying = true;
@@ -71,8 +71,6 @@ public class ProgrammingChallenge_01 {
         ArrayList<Integer> randomGenerated = new ArrayList<Integer>();      
         ArrayList<Integer> randomAnswers = new ArrayList<Integer>();                
 
-
-        
         String answer;
         String cat[][];
         String catName = "Not especified";
@@ -92,12 +90,6 @@ public class ProgrammingChallenge_01 {
         int consecutiveErrors = 0;
         int consecutiveCorr = 0;
 
-
-        
-        
-
-         
-        
         while (keepPlaying) {
 
             System.out.println("\n------Select category------"+
@@ -350,13 +342,25 @@ public class ProgrammingChallenge_01 {
 			}
 	}
 	
+    public static void logQuestions (String category [][]){
+        for (int j= 0; j < category[0].length; j++){
+            int k = j+1;
+            System.out.println(k+". "+category[0][j]);
+        }
+    }
+
 	public static void modArray (String category [][]){
 		System.out.println();
+
+        System.out.println("Modifications: \n1. Add a question and / or an answer/s \n2. Modify a question and / or an answer/s \n3. Delate a question and / or an asnwer/s");
+        int mod;
+        do {
+            Scanner e = new Scanner(System.in);
+            mod = e.nextInt();
+        } while (mod<1 && mod>4);
+
 		System.out.println("\nNumber of question to modify:");
-		for (int j= 0; j < category[0].length; j++){
-			int k = j+1;
-			System.out.println(k+". "+category[0][j]);
-		}
+		logQuestions(category);
 
 		Scanner r = new Scanner(System.in);
 		int questionNum = r.nextInt()-1;
@@ -383,26 +387,37 @@ public class ProgrammingChallenge_01 {
 	}
 	
 	public static void modNewQuizz (){
-		for (int q = 0; q < userQANDA[0].length; q++){
-			int qn = q+1;
-			System.out.println("\n\nQuestion nº "+qn+":");
-			Scanner a = new Scanner(System.in);
-			String newQuestionArray = a.nextLine();
-			userQANDA[0][q] = newQuestionArray;
-			
-			for (int w = 1; w <= 3;w++){
-				if(w==1){
-					System.out.println("\nType the correct answer:");
-				}else{
-					System.out.println("\nType a false answer:");
-				}
+        System.out.println("\nType of quizz: \n1. Test (a b c) \n2. Multiple answers correct");
+        int typeNewQuizz;
+        do {
+            Scanner s = new Scanner(System.in);
+            typeNewQuizz = s.nextInt();
+        } while (typeNewQuizz<1 && typeNewQuizz>2);
+       
+            for (int q = 0; q < userQANDA[0].length; q++){
+                int qn = q+1;
+                System.out.println("\n\nQuestion nº "+qn+":");
+                Scanner a = new Scanner(System.in);
+                String newQuestionArray = a.nextLine();
+                userQANDA[0][q] = newQuestionArray;
+                
+                for (int w = 1; w <= 3;w++){
+                    if (typeNewQuizz==1){    
+                        if(w==1){
+                            System.out.println("\nType the correct answer:");
+                        }else{
+                            System.out.println("\nType a false answer:");
+                        }
+                    } else {
+                        System.out.println("Type a possible asnwer:");
+                    }
 
-				Scanner e = new Scanner(System.in);
-				String userNewArrayAnswer = e.nextLine();
-				userQANDA[w][q] = userNewArrayAnswer;
-			}
-			System.out.println("Your new Quizz has been created succesfuly.");
-		}
-		openOptions();
+                    Scanner e = new Scanner(System.in);
+                    String userNewArrayAnswer = e.nextLine();
+                    userQANDA[w][q] = userNewArrayAnswer;
+                }
+            }
+            System.out.println("Your new Quizz has been created succesfuly.");
+            openOptions();
+        }	
 	}
-}
