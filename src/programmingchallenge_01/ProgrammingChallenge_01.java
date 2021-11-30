@@ -6,24 +6,22 @@ import java.util.Scanner;
 
 public class ProgrammingChallenge_01 {
 
-    public static void main(String[] args) {
-
-        //CATEGORY 1
-        final String QANDA1 [][] = {{"What is the invention that made Piltover grow and more expandable?", 
+    //CATEGORY 1
+        final static String QANDA1 [][] = {{"What is the invention that made Piltover grow and more expandable?", 
                                      "From what city Ambessa Medarda comes to Piltover?",
                                      "Wha's the name of the drug used in Zaun to increse their strength?",
                                      "Who saved Jayce and her mother when he was a little boy?",
                                      "Wich character have a pocket watch?",
                                      "Witch Jinx's weapons use the gemstone to upgrade it's power?",
-                                     "What adjustment engineer did Jayce and Viktor made to control the Hexcores? ",
+                                     "What adjustment engineer did Jayce and Viktor made to control the Hexcores?",
                                      "Question 8",
                                      "Question 9",
                                      "Question 10"},
-                                    {"(Portal)??", "Noxia", "Shimmer", "Ryze", "Ekko", "FishBones", "High frequency stabilization", "yes", "yes", "no"},
+	  /* quizz 1 correct answers */ {"(Portal)??", "Noxia", "Shimmer", "Ryze", "Ekko", "FishBones", "High frequency stabilization", "yes", "yes", "no"},
                                     {"(Hoverboards)??" , "Zaun", "3??", "Viktor", "Jayce", "Pow-pow" ,"Highest power supply ", "8", "9", "10"},
                                     {"()??", "Demacia", "c??", "Galio", "Heimerdinger", "Zaap", "The right reflective mirrors", "h", "i", "j"}};
         //CATEGORY 2
-        final String QANDA2 [][] = {{"Question 1.2", 
+        final static String QANDA2 [][] = {{"Question 1.2", 
                                      "Question 2.2",
                                      "Question 3.2",
                                      "Question 4.2",
@@ -37,7 +35,7 @@ public class ProgrammingChallenge_01 {
                                     {"1" , "2", "3", "4", "5", "6" ,"7", "8", "9", "10"},
                                     {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}};
         //CATEGORY 3
-        final String QANDA3 [][] = {{"Question 1.3", 
+        final static String QANDA3 [][] = {{"Question 1.3", 
                                      "Question 2.3",
                                      "Question 3.3",
                                      "Question 4.3",
@@ -51,20 +49,28 @@ public class ProgrammingChallenge_01 {
                                     {"1" , "2", "3", "4", "5", "6" ,"7", "8", "9", "10"},
                                     {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}};
 
+		//PERCENTAGE 
+        final static String LOWANS = "The user answered from  0% to 33% of the questions correctly.";
+        final static String MEDLOWANS = "The user answered from  34% to 66% of the questions correctly.";
+        final static String MEDHIGHANS = "The user answered from  67% to 99% of the questions correctly.";
+        final static String HIGHANS = "The user answered 100% of the questions correctly.";
+
+        //CAT NAME
+        final static String CAT1 = "Arcane serie";
+        final static String CAT2 = "CATEGORY 2";
+        final static String CAT3 = "CATEGORY 3";
+
+        final static String userQANDA [][] = new String [4] [10];
+		
+		static boolean keepPlaying = true;
+
+    public static void main(String[] args) {
+
+
         //NON-REPEATED RANDOM VALUES ARRAY
         ArrayList<Integer> randomGenerated = new ArrayList<Integer>();      
         ArrayList<Integer> randomAnswers = new ArrayList<Integer>();                
 
-        //PERCENTAGE 
-        final String LOWANS = "The user answered from  0% to 33% of the questions correctly.";
-        final String MEDLOWANS = "The user answered from  34% to 66% of the questions correctly.";
-        final String MEDHIGHANS = "The user answered from  67% to 99% of the questions correctly.";
-        final String HIGHANS = "The user answered 100% of the questions correctly.";
-
-        //CAT NAME
-        final String CAT1 = "Arcane serie";
-        final String CAT2 = "CATEGORY 2";
-        final String CAT3 = "CATEGORY 3";
 
         
         String answer;
@@ -75,7 +81,7 @@ public class ProgrammingChallenge_01 {
         final int VAL_EXTRAPOINTS = 20;
 
         int randomQ;
-        int categroy; 
+        int categroy=0; 
 
         int extraPoints = 0;
 
@@ -86,10 +92,9 @@ public class ProgrammingChallenge_01 {
         int consecutiveErrors = 0;
         int consecutiveCorr = 0;
 
-        int gameCounter = 0;
 
-        boolean keepPlaying = true;
-        boolean validCat = false;
+        
+        
 
          
         
@@ -101,13 +106,18 @@ public class ProgrammingChallenge_01 {
                 ConsoleColors.PURPLE_BOLD_BRIGHT+"\n2."+CAT3+ConsoleColors.RESET+
                 "\n---------------------------");
             //VALID CAT INPUT
+            boolean validCat = false;
             do {
                 Scanner catIn = new Scanner(System.in);
-                categroy = catIn.nextInt();
-                if (categroy > 0 && categroy <=3){
+                if (!catIn.hasNextInt()){
+                    System.out.println("Input error.\nEnter a number to select the category:");
+                }else {
+                    categroy = catIn.nextInt();
+                    if (categroy > 0 && categroy <=3){
                     validCat = true;
-                } else {
+                    } else{
                     System.out.println("Error. You need to choose a category (1, 2 or 3)");
+                    }
                 }
             }while(!validCat);
 
@@ -137,7 +147,8 @@ public class ProgrammingChallenge_01 {
                     } while (randomGenerated.contains(randomQ));
 
                 randomGenerated.add(randomQ);
-                System.out.println("\n" + cat[0][randomQ]);
+                //QUESTION PRINT
+                System.out.println(ConsoleColors.CYAN_BOLD+"\n" + cat[0][randomQ]+ConsoleColors.RESET);
                 System.out.println();
                 // RANDOM DISPLAY TIPO TEST
                 String testA="";
@@ -146,8 +157,8 @@ public class ProgrammingChallenge_01 {
 
                 while (cat == QANDA1 && randomAnswers.size()<= 2) { //add cat to display test abc.
                     Random r = new Random();
-                    int randomA = r.nextInt(1,4);
-
+                    int randomA = r.nextInt(3)+1;//genera (0...n-1) +1
+					
                     if (!randomAnswers.contains(randomA)){
                         switch(randomAnswers.size()){
                             case 0:
@@ -173,6 +184,7 @@ public class ProgrammingChallenge_01 {
                 answer = answerIn.nextLine().toLowerCase();
                 
                 // ANSWER AUTOMOD
+                //TIPO TEST
                 switch(answer){
                     case "a":
                     answer = testA;
@@ -183,15 +195,16 @@ public class ProgrammingChallenge_01 {
                     case "c":
                     answer = testC;
                 }
-                if (answer.equals("yes")) {
-                    answer = "y";
-                } else if (answer.equals("no"))
-                    answer = "n";
+                // Y/N ANSWERS
+                if (answer.equals("y")) {
+                    answer = "yes";
+                } else if (answer.equals("n"))
+                    answer = "no";
 
-                
                 int itsCorrect = 0; //1= correct 0 = incorrect
                 String validAns;
                 boolean correctAns = false;
+
                 // ANS VALIDATION
                 int j = 1;
                 while (j < cat.length && !correctAns) {
@@ -209,7 +222,8 @@ public class ProgrammingChallenge_01 {
                         itsCorrect = 0;
                     }
                     j++;
-                };
+                }
+	
                 // CORRECT
                 if (itsCorrect == 1){ // a lot of var??
                     System.out.println("\nCorrect!");
@@ -229,28 +243,26 @@ public class ProgrammingChallenge_01 {
                     normalCorr -= consecutiveCorr;
                     consecutiveCorr = 0;
                 }
-                gameCounter++;
 
-                // GAME OVER CONDITIONS
-                if (gameCounter >= cat[0].length) {
+                // GAME OVER CONDITION
+                if (consecutiveErrors >= 3) {
                     endGame = true;
-                } else if (consecutiveErrors >= 3) {
-                    endGame = true;
-                    System.out.println("\nYou failed 3 questions in a row...\nGood luck next time!");
+                    System.out.println(ConsoleColors.RED_BRIGHT+"\nYou failed 3 questions in a row..."+ConsoleColors.RESET);
                 }
             }
+            consecutiveErrors = 0;
             randomGenerated.clear();
             randomAnswers.clear();
 
             // CORRECT INCORRECT SCORE
             int score = extraPoints + normalCorr*VAL_POINTS;
-            System.out.println();
-            System.out.println(ConsoleColors.RED+"*--------------------------*\n           GAME OVER\n*--------------------------*"+ConsoleColors.RESET);
-            System.out.println("*Category: "+ catName);
+            System.out.println();                  
+            System.out.println(ConsoleColors.RED+"*==========================*\n           GAME OVER\n*==========================*"+ConsoleColors.RESET);
+            System.out.println("\nCategory: "+ catName);
             System.out.println("\nCorrect answers: "+ConsoleColors.GREEN+correctCount+ConsoleColors.RESET+"\nIncorrect answers: "+ConsoleColors.RED+incorrectCount+ConsoleColors.RESET);
             System.out.println(ConsoleColors.GREEN_BOLD+"\nScore: "+ score + " points"+ConsoleColors.RESET);
 
-            // PERCENTAGE
+            // CORRECT PERCENTAGE
             Double correctPerc = (double)(correctCount*100)/QANDA1[0].length;
 
             System.out.println("\nPercentage: "+correctPerc+"%");
@@ -265,15 +277,128 @@ public class ProgrammingChallenge_01 {
                 System.out.println(HIGHANS);
             }
 
-            // PLAY AGAIN
-            System.out.println("\nDo you want to play again?\nY/N");
-            Scanner againIn = new Scanner(System.in);
-            String playAgain = againIn.nextLine().toLowerCase();
-
-            if (playAgain.equals("n") || playAgain.equals("no")){
-                keepPlaying = false;
-                System.out.println("See you next time!");
-            }
+            openOptions();
         }
     }
+	
+	public static void openOptions() {
+		boolean validOption = true;
+            int option;
+            do {
+                System.out.println(ConsoleColors.YELLOW+"\nOptions:"+ConsoleColors.RESET+"\n1. Play again.\n2. Questions mod / new quizz\n3. Exit game");
+                Scanner optionsIScanner = new Scanner(System.in);
+                    option = optionsIScanner.nextInt();
+                if (option < 1 || option > 3 ){
+                    validOption = false;
+                } else{
+                    System.out.println("Error. Invalid input.");
+				}
+				
+            }while (!validOption);
+
+            boolean modValidIn = true;
+            int mod=0;
+
+            switch(option){
+                case 1:
+                keepPlaying = true;
+                break;
+
+                case 2:
+                System.out.println(ConsoleColors.YELLOW+"\n2. Select your mod:"+ConsoleColors.RESET+"\n1. Modify a quizz\n2. Create a new quizz");
+                do {
+                    Scanner modIn = new Scanner(System.in);
+                    mod = modIn.nextInt();
+                    if (mod != 1 || mod !=2){ 
+                    }else{
+                        System.out.println("Error. Invalid input.");
+                        modValidIn = false;
+                    }
+                } while (!modValidIn);
+                break;
+
+                case 3:
+                keepPlaying = false;
+                System.out.println("See you next time!");
+                break;
+            }
+            if(mod == 1) {
+                System.out.println("\nSelect the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
+                ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
+                ConsoleColors.PURPLE_BOLD_BRIGHT+"\n2."+CAT3+ConsoleColors.RESET);
+                boolean validOptionCat = true;
+                int catOption;
+                do {
+                    Scanner catOptionIn = new Scanner(System.in);
+                    catOption = catOptionIn.nextInt();
+                    if (catOption == 1){
+                        modArray(QANDA1);
+                    }else if (catOption == 2){
+                        modArray(QANDA2);
+                    }else if(catOption == 3){
+                        modArray(QANDA3);
+                    }else{
+                        System.out.println("Error. Invalid input.");
+                        validOption = false;
+                    }
+                } while (!validOptionCat); 
+
+            } else if (mod == 2) {
+                modNewQuizz();
+            }
+	}
+	
+	public static void modArray (String category [][]){
+		System.out.println();
+		System.out.println("\nNumber of question to modify:");
+		for (int j= 0; j < category[0].length; j++){
+			int k = j+1;
+			System.out.println(k+". "+category[0][j]);
+		}
+
+		Scanner r = new Scanner(System.in);
+		int questionNum = r.nextInt()-1;
+
+		System.out.println("Type the new question:");
+		Scanner s = new Scanner(System.in);
+		String newQuestion = s.nextLine();
+		category[0][questionNum] = newQuestion;
+
+		System.out.println("Do you want to modify the answers?\nY/N");
+		Scanner ansModIn = new Scanner(System.in);
+		String answersMod = ansModIn.nextLine().toLowerCase();
+
+		if (answersMod.equals("y")||answersMod.equals("yes")){
+			for (int m = 1; m <= 3; m++){
+				System.out.println("Type new answer:");
+				Scanner t = new Scanner(System.in);
+				String modAnswer = t.nextLine();
+				userQANDA[m][questionNum] = modAnswer;
+			}
+		}
+		openOptions();
+	}
+	
+	public static void modNewQuizz (){
+		for (int q = 0; q < userQANDA[0].length; q++){
+			int qn = q+1;
+			System.out.println("\n\nQuestion nº "+qn+":");
+			Scanner a = new Scanner(System.in);
+			String newQuestionArray = a.nextLine();
+			userQANDA[0][q] = newQuestionArray;
+			
+			for (int w = 1; w <= 3;w++){
+				if(w==1){
+					System.out.println("\nType the correct answer:");
+				}else{
+					System.out.println("\nType a false answer:");
+				}
+
+				Scanner e = new Scanner(System.in);
+				String userNewArrayAnswer = e.nextLine();
+				userQANDA[w][q] = userNewArrayAnswer;
+			}
+		}
+		openOptions();
+	}
 }
