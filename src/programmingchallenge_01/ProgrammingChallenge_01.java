@@ -274,6 +274,7 @@ public class ProgrammingChallenge_01 {
     }
 	
 	public static void openOptions() {
+
 		boolean validOption = true;
             int option;
             do {
@@ -291,13 +292,13 @@ public class ProgrammingChallenge_01 {
             boolean modValidIn = true;
             int mod=0;
 
-            switch(option){
+            switch(option){ //KEEP PLAYING -- MODS -- EXIT
                 case 1:
                 keepPlaying = true;
                 break;
 
                 case 2:
-                System.out.println(ConsoleColors.YELLOW+"\n2. Select your mod:"+ConsoleColors.RESET+"\n1. Modify a quizz\n2. Create a new quizz\n3. Back");
+                System.out.println(ConsoleColors.YELLOW+"\nSelect your mod:"+ConsoleColors.RESET+"\n1. Modify a quizz\n2. Create a new quizz\n3. Back");
                 do {
                     Scanner modIn = new Scanner(System.in);
                     mod = modIn.nextInt();
@@ -314,7 +315,7 @@ public class ProgrammingChallenge_01 {
                 System.out.println("See you next time!");
                 break;
             }
-            if(mod == 1) {
+            if(mod == 1) { //MOD A CATEGORY
                 System.out.println("\nSelect the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
                 ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
                 ConsoleColors.PURPLE_BOLD_BRIGHT+"\n2."+CAT3+ConsoleColors.RESET);
@@ -335,89 +336,194 @@ public class ProgrammingChallenge_01 {
                     }
                 } while (!validOptionCat); 
 
-            } else if (mod == 2) {
-                modNewQuizz();
-            } else if (mod == 3) {
+            } else if (mod == 2) { //NEW QUIZZ
+                System.out.println("\nType of quizz: \n1. Test (a b c) \n2. Multiple answers correct");
+                int typeNewQuizz;
+                do {
+                    Scanner s = new Scanner(System.in);
+                    typeNewQuizz = s.nextInt();
+                } while (typeNewQuizz<1 && typeNewQuizz>2);
+
+                    for (int q = 0; q < userQANDA[0].length; q++){
+                        int qn = q+1;
+                        System.out.println("\n\nQuestion nº "+qn+":");
+                        Scanner a = new Scanner(System.in);
+                        String newQuestionArray = a.nextLine();
+                        userQANDA[0][q] = newQuestionArray;
+                        
+                        for (int w = 1; w <= 3;w++){
+                            if (typeNewQuizz==1){    
+                                if(w==1){
+                                    System.out.println("\nType the correct answer:");
+                                }else{
+                                    System.out.println("\nType a false answer:");
+                                }
+                            } else {
+                                System.out.println("Type a possible asnwer:");
+                            }
+
+                            Scanner e = new Scanner(System.in);
+                            String userNewArrayAnswer = e.nextLine();
+                            userQANDA[w][q] = userNewArrayAnswer;
+                        }
+                    }
+                    System.out.println("Your new Quizz has been created succesfuly.");
+                    openOptions();
+
+            } else if (mod == 3) { //BACK TO OPTIONS
 				openOptions();
 			}
 	}
 	
-    public static void logQuestions (String category [][]){
-        for (int j= 0; j < category[0].length; j++){
-            int k = j+1;
-            System.out.println(k+". "+category[0][j]);
-        }
-    }
 
 	public static void modArray (String category [][]){
 		System.out.println();
 
         System.out.println("Modifications: \n1. Add a question and / or an answer/s \n2. Modify a question and / or an answer/s \n3. Delate a question and / or an asnwer/s");
         int mod;
+        boolean validMod = true;
         do {
             Scanner e = new Scanner(System.in);
             mod = e.nextInt();
-        } while (mod<1 && mod>4);
+            if ((mod <=3 && mod>=1)&& mod==6) {
+                validMod = true;
+            }
+        } while (!validMod);
+        
+        if (mod == 1){ //ADD
+        } else if (mod == 2){ //MODIFY
+            System.out.println("\nNumber of question to modify:");
+            System.out.println();
+            logQuestions(category);
 
-		System.out.println("\nNumber of question to modify:");
-		logQuestions(category);
+            Scanner r = new Scanner(System.in);
+            int questionNum = r.nextInt()-1;
 
-		Scanner r = new Scanner(System.in);
-		int questionNum = r.nextInt()-1;
+            System.out.println("Type the new question:");
+            Scanner s = new Scanner(System.in);
+            String newQuestion = s.nextLine();
+            category[0][questionNum] = newQuestion;
 
-		System.out.println("Type the new question:");
-		Scanner s = new Scanner(System.in);
-		String newQuestion = s.nextLine();
-		category[0][questionNum] = newQuestion;
+            System.out.println("Do you want to modify the answers?\nY/N");
+            Scanner ansModIn = new Scanner(System.in);
+            String answersMod = ansModIn.nextLine().toLowerCase();
 
-		System.out.println("Do you want to modify the answers?\nY/N");
-		Scanner ansModIn = new Scanner(System.in);
-		String answersMod = ansModIn.nextLine().toLowerCase();
+            if (answersMod.equals("y")||answersMod.equals("yes")){
+                for (int m = 1; m <= 3; m++){
+                    System.out.println("Type new answer:");
+                    Scanner t = new Scanner(System.in);
+                    String modAnswer = t.nextLine();
+                    userQANDA[m][questionNum] = modAnswer;
+                }
+                System.out.println("Your modifications has been done succesfuly.");
+		    }
 
-		if (answersMod.equals("y")||answersMod.equals("yes")){
-			for (int m = 1; m <= 3; m++){
-				System.out.println("Type new answer:");
-				Scanner t = new Scanner(System.in);
-				String modAnswer = t.nextLine();
-				userQANDA[m][questionNum] = modAnswer;
-			}
-			System.out.println("Your modifications has been done succesfuly.");
-		}
+        //DELATE 1.QUESTION 2.ANSWER
+        } else if (mod == 3) { //DELATE
+    
+            System.out.println("\nWhat do you want to delate?\n1. Question/s\n2. Answer/s");
+            int whatToDelate; 
+            do {
+                Scanner d = new Scanner(System.in);
+                whatToDelate = d.nextInt();
+            } while (whatToDelate<1 || whatToDelate>2);
+
+        delate(whatToDelate, category); //1.QUESTIONS 2.ANSWERS
+        } else if (mod == 6) { //EG
+            System.out.println("\nYou found a esater egg 0.o!\n1. Questions\n2. Answers");
+            int easterEgg; 
+            do{
+                Scanner t = new Scanner(System.in);
+                easterEgg = t.nextInt();
+            } while (easterEgg!=1&&easterEgg!=2);
+            switch (easterEgg){
+                case 1:
+                System.out.println();
+                logQuestions(category);
+                break;
+                case 2:
+                
+                logQuestions(category);
+                break;
+            }  
+        }
 		openOptions();
 	}
-	
-	public static void modNewQuizz (){
-        System.out.println("\nType of quizz: \n1. Test (a b c) \n2. Multiple answers correct");
-        int typeNewQuizz;
-        do {
-            Scanner s = new Scanner(System.in);
-            typeNewQuizz = s.nextInt();
-        } while (typeNewQuizz<1 && typeNewQuizz>2);
-       
-            for (int q = 0; q < userQANDA[0].length; q++){
-                int qn = q+1;
-                System.out.println("\n\nQuestion nº "+qn+":");
-                Scanner a = new Scanner(System.in);
-                String newQuestionArray = a.nextLine();
-                userQANDA[0][q] = newQuestionArray;
-                
-                for (int w = 1; w <= 3;w++){
-                    if (typeNewQuizz==1){    
-                        if(w==1){
-                            System.out.println("\nType the correct answer:");
-                        }else{
-                            System.out.println("\nType a false answer:");
-                        }
-                    } else {
-                        System.out.println("Type a possible asnwer:");
-                    }
 
-                    Scanner e = new Scanner(System.in);
-                    String userNewArrayAnswer = e.nextLine();
-                    userQANDA[w][q] = userNewArrayAnswer;
+    public static void delate (int whatToDelate, String category [][]){
+
+        System.out.println("\nNumber of question to delate:");
+        System.out.println();
+        logQuestions(category);
+
+        int delateQuestion;
+        do  {   
+            Scanner w = new Scanner(System.in);
+            delateQuestion = w.nextInt();
+        } while (delateQuestion < 1 || delateQuestion > 10);
+        
+        if (whatToDelate==1){ //DELATE QUESTION
+            category [0][delateQuestion] = "";
+            System.out.println("Question "+delateQuestion+" has been delated succesfully.\n1");
+            System.out.println("\nDo you want to delate another question?\nY/N\n");
+                Scanner d = new Scanner(System.in);
+                String delateAnotherQuestion = d.nextLine().toLowerCase();
+                if (delateAnotherQuestion.equals("y") || delateAnotherQuestion.equals("yes")) {
+                    delate(1,category);
+                } else {
+                    openOptions();
+                }
+
+        } else if (whatToDelate==2){ //DELATE ANSWER
+            Boolean stopDelate = false;
+            delateAnswers(category, delateQuestion);
+            
+            while (!stopDelate) {
+                System.out.println("Do you want to delate another answer?\nY/N\n");
+                Scanner s = new Scanner(System.in);
+                String answerDelateQ = s.nextLine().toLowerCase();
+
+                if (answerDelateQ.equals("y") || answerDelateQ.equals("yes")) {
+                    System.out.println("Of the same question?\nY/N\n");
+                    Scanner r = new Scanner(System.in);
+                    String delateSameQuestion = r.nextLine().toLowerCase();
+                    if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
+                        delateAnswers(category,delateQuestion);
+                    } else {
+                        delate(2, category);
+                    }
+                } else {
+                    stopDelate = true;
                 }
             }
-            System.out.println("Your new Quizz has been created succesfuly.");
-            openOptions();
-        }	
-	}
+        }
+    }
+
+    public static void delateAnswers (String category [][], int row){
+       
+        System.out.println("\nAnswer to delate:\n");
+        logAnswers(category, row);
+        int delateAnswers;
+        do  {   
+            Scanner s= new Scanner(System.in);
+            delateAnswers = s.nextInt();
+        } while (delateAnswers < 1 || delateAnswers > 10);
+        category[delateAnswers][row] = "";
+    }
+
+    public static void logQuestions (String category [][]){
+
+        for (int j= 0; j < category[0].length; j++){
+            int k = j+1;
+            System.out.println(k+". "+category[0][j]);
+        }
+    }
+
+    public static void logAnswers (String category [][], int row){
+
+        for (int h = 1; h < category.length; h++){
+            System.out.println(h+". "+category[h][row]);
+        }
+    }
+
+}
