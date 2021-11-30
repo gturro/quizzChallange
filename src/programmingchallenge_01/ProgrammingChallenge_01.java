@@ -276,7 +276,7 @@ public class ProgrammingChallenge_01 {
             } else if (correctPerc == 100) {
                 System.out.println(HIGHANS);
             }
-
+	// OPTIONS
             openOptions();
         }
     }
@@ -305,11 +305,11 @@ public class ProgrammingChallenge_01 {
                 break;
 
                 case 2:
-                System.out.println(ConsoleColors.YELLOW+"\n2. Select your mod:"+ConsoleColors.RESET+"\n1. Modify a quizz\n2. Create a new quizz");
+                System.out.println(ConsoleColors.YELLOW+"\n2. Select your mod:"+ConsoleColors.RESET+"\n1. Modify a quizz\n2. Create a new quizz\n3. Back");
                 do {
                     Scanner modIn = new Scanner(System.in);
                     mod = modIn.nextInt();
-                    if (mod != 1 || mod !=2){ 
+                    if (mod>=1 ||mod<=3){ 
                     }else{
                         System.out.println("Error. Invalid input.");
                         modValidIn = false;
@@ -345,7 +345,9 @@ public class ProgrammingChallenge_01 {
 
             } else if (mod == 2) {
                 modNewQuizz();
-            }
+            } else if (mod == 3) {
+				openOptions();
+			}
 	}
 	
 	public static void modArray (String category [][]){
@@ -375,6 +377,7 @@ public class ProgrammingChallenge_01 {
 				String modAnswer = t.nextLine();
 				userQANDA[m][questionNum] = modAnswer;
 			}
+			System.out.println("Your modifications has been done succesfuly.");
 		}
 		openOptions();
 	}
@@ -398,6 +401,7 @@ public class ProgrammingChallenge_01 {
 				String userNewArrayAnswer = e.nextLine();
 				userQANDA[w][q] = userNewArrayAnswer;
 			}
+			System.out.println("Your new Quizz has been created succesfuly.");
 		}
 		openOptions();
 	}
