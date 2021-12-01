@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class ProgrammingChallenge_01 {
 
     //CATEGORY 1
+    
         final static String QANDA1 [][] = {{"What is the invention that made Piltover grow and more expandable?", 
                                      "From what city Ambessa Medarda comes to Piltover?",
                                      "Wha's the name of the drug used in Zaun to increse their strength?",
@@ -392,7 +393,6 @@ public class ProgrammingChallenge_01 {
 			}
 	}
 	
-
 	public static void modifications (String category [][]){
 		System.out.println();
 
@@ -418,10 +418,10 @@ public class ProgrammingChallenge_01 {
                 whatToModify = d.nextInt();
             } while (whatToModify<1 || whatToModify>2);
 
-            modify(whatToModify, category);
+            modChange(whatToModify, category);
            
         
-        } else if (mod == 3) { //DELATE 1.QUESTION 2.ANSWER
+        } else if (mod == 3) {
     
             System.out.println("\nWhat do you want to delate?\n1. Question/s\n2. Answer/s");
             int whatToDelate; 
@@ -430,7 +430,7 @@ public class ProgrammingChallenge_01 {
                 whatToDelate = d.nextInt();
             } while (whatToDelate<1 || whatToDelate>2);
 
-        delate(whatToDelate, category); //1.QUESTIONS 2.ANSWERS
+        modDelate(whatToDelate, category); //whatToDelate 1.QUESTIONS 2.ANSWERS
         } else if (mod == 6) { //EG
             System.out.println("\nYou found a esater egg 0.o!\n1. Questions\n2. Answers");
             int easterEgg; 
@@ -451,7 +451,11 @@ public class ProgrammingChallenge_01 {
 		openOptions();
 	}
 
-    public static void modify (int whatToModify, String category [][]) {
+    public static void modAdd () {
+        
+    }
+
+    public static void modChange (int whatToModify, String category [][]) {
         
         System.out.println("\nNumber of question to modify:");
         System.out.println();
@@ -474,14 +478,14 @@ public class ProgrammingChallenge_01 {
                 Scanner d = new Scanner(System.in);
                 String modifyAnotherQuestion = d.nextLine().toLowerCase();
                 if (modifyAnotherQuestion.equals("y") || modifyAnotherQuestion.equals("yes")) {
-                    modify(1,category);
+                    modChange(1,category);
                 } else {
                     openOptions();
                 }
 
         } else if (whatToModify==2){ //MODIFY ANSWER
             Boolean stopModifying = false;
-            modifyAnswer(category, modifyQuestion);
+            changeAnswer(category, modifyQuestion);
             
             while (!stopModifying) {
                 System.out.println("Do you want to modify another answer's question?\nY/N\n");
@@ -494,9 +498,9 @@ public class ProgrammingChallenge_01 {
                     String delateSameQuestion = r.nextLine().toLowerCase();
 
                     if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
-                        modifyAnswer(category, modifyQuestion);
+                        changeAnswer(category, modifyQuestion);
                     } else {
-                        modify(2,category);
+                        modChange(2,category);
                     }
                 } else {
                     stopModifying = true;
@@ -506,7 +510,7 @@ public class ProgrammingChallenge_01 {
         
     }
 
-    public static void modifyAnswer (String category [][], int row) {
+    public static void changeAnswer (String category [][], int row) {
 
         System.out.println("\nAnswer to modify:\n");
         logAnswers(category, row);
@@ -521,7 +525,7 @@ public class ProgrammingChallenge_01 {
         category[modifyAnswer][row] = newModAnswer;
     }
 
-    public static void delate (int whatToDelate, String category [][]){
+    public static void modDelate (int whatToDelate, String category [][]){
 
         System.out.println("\nNumber of question to delate:");
         System.out.println();
@@ -540,7 +544,7 @@ public class ProgrammingChallenge_01 {
                 Scanner d = new Scanner(System.in);
                 String delateAnotherQuestion = d.nextLine().toLowerCase();
                 if (delateAnotherQuestion.equals("y") || delateAnotherQuestion.equals("yes")) {
-                    delate(1,category);
+                    modDelate(1,category);
                 } else {
                     openOptions();
                 }
@@ -561,7 +565,7 @@ public class ProgrammingChallenge_01 {
                     if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
                         delateAnswers(category,delateQuestion);
                     } else {
-                        delate(2, category);
+                        modDelate(2, category);
                     }
                 } else {
                     stopDelate = true;
@@ -582,6 +586,7 @@ public class ProgrammingChallenge_01 {
         category[delateAnswers][row] = "";
     }
 
+    //eg log
     public static void logQuestions (String category [][]){
 
         for (int j= 0; j < category[0].length; j++){
