@@ -59,13 +59,15 @@ public class ProgrammingChallenge_01 {
         final static String CAT1 = "Arcane serie";
         final static String CAT2 = "CATEGORY 2";
         final static String CAT3 = "CATEGORY 3";
+              static String CAT4 = "User Quizz";
+
         //NEW USER ARRAY
-        final static String userQANDA [][] = new String [4] [10];
+        static String userQANDA [][] = null;
+        
 		
 		static boolean keepPlaying = true;
 
     public static void main(String[] args) {
-
 
         //NON-REPEATED RANDOM VALUES ARRAY
         ArrayList<Integer> randomGenerated = new ArrayList<Integer>();      
@@ -79,7 +81,7 @@ public class ProgrammingChallenge_01 {
         final int VAL_EXTRAPOINTS = 20;
 
         int randomQ;
-        int categroy=0; 
+        int category=0; 
 
         int extraPoints = 0;
 
@@ -91,11 +93,12 @@ public class ProgrammingChallenge_01 {
         int consecutiveCorr = 0;
 
         while (keepPlaying) {
-
+            
             System.out.println("\n------Select category------"+
                 ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
                 ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
-                ConsoleColors.PURPLE_BOLD_BRIGHT+"\n2."+CAT3+ConsoleColors.RESET+
+                ConsoleColors.PURPLE_BOLD_BRIGHT+"\n3."+CAT3+ConsoleColors.RESET+
+                ConsoleColors.WHITE_BOLD_BRIGHT+"\n4. "+CAT4+ConsoleColors.RESET+
                 "\n---------------------------");
             //VALID CAT INPUT
             boolean validCat = false;
@@ -104,17 +107,21 @@ public class ProgrammingChallenge_01 {
                 if (!catIn.hasNextInt()){
                     System.out.println("Input error.\nEnter a number to select the category:");
                 }else {
-                    categroy = catIn.nextInt();
-                    if (categroy > 0 && categroy <=3){
-                    validCat = true;
+                    category = catIn.nextInt();
+                    if (category > 0 && category <=4){
+                        if (category == 4 && userQANDA == null){
+                            System.out.println("This Quizz is not avaliable now.\nChoose one of the three first categories.");
+                        }else{
+                            validCat = true;
+                        }
                     } else{
-                    System.out.println("Error. You need to choose a category (1, 2 or 3)");
+                    System.out.println(" Choose a number of one of the categories:");
                     }
                 }
             }while(!validCat);
 
             // CATEGORY SWITCH
-            switch (categroy) {
+            switch (category) {
                 case 1:
                     cat = QANDA1;
                     catName = CAT1;
@@ -126,6 +133,10 @@ public class ProgrammingChallenge_01 {
                 case 3:
                     cat = QANDA3;
                     catName = CAT3;
+                    break;
+                case 4:
+                    cat = userQANDA;
+                    catName = CAT4;
                     break;
                 default:
                      cat = QANDA1;
@@ -318,18 +329,18 @@ public class ProgrammingChallenge_01 {
             if(mod == 1) { //MOD A CATEGORY
                 System.out.println("\nSelect the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
                 ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
-                ConsoleColors.PURPLE_BOLD_BRIGHT+"\n2."+CAT3+ConsoleColors.RESET);
+                ConsoleColors.PURPLE_BOLD_BRIGHT+"\n3."+CAT3+ConsoleColors.RESET);
                 boolean validOptionCat = true;
                 int catOption;
                 do {
                     Scanner catOptionIn = new Scanner(System.in);
                     catOption = catOptionIn.nextInt();
                     if (catOption == 1){
-                        modArray(QANDA1);
+                        modifications(QANDA1);
                     }else if (catOption == 2){
-                        modArray(QANDA2);
+                        modifications(QANDA2);
                     }else if(catOption == 3){
-                        modArray(QANDA3);
+                        modifications(QANDA3);
                     }else{
                         System.out.println("Error. Invalid input.");
                         validOption = false;
@@ -337,6 +348,7 @@ public class ProgrammingChallenge_01 {
                 } while (!validOptionCat); 
 
             } else if (mod == 2) { //NEW QUIZZ
+                userQANDA = new String [4] [10];
                 System.out.println("\nType of quizz: \n1. Test (a b c) \n2. Multiple answers correct");
                 int typeNewQuizz;
                 do {
@@ -367,6 +379,11 @@ public class ProgrammingChallenge_01 {
                             userQANDA[w][q] = userNewArrayAnswer;
                         }
                     }
+                    System.out.println("\nType a new name for your Quizz:\n");
+                    Scanner e = new Scanner(System.in);
+                    String newQuizzName = e.nextLine();
+                    CAT4 = newQuizzName;
+
                     System.out.println("Your new Quizz has been created succesfuly.");
                     openOptions();
 
@@ -376,7 +393,7 @@ public class ProgrammingChallenge_01 {
 	}
 	
 
-	public static void modArray (String category [][]){
+	public static void modifications (String category [][]){
 		System.out.println();
 
         System.out.println("Modifications: \n1. Add a question and / or an answer/s \n2. Modify a question and / or an answer/s \n3. Delate a question and / or an asnwer/s");
@@ -579,5 +596,4 @@ public class ProgrammingChallenge_01 {
             System.out.println(h+". "+category[h][row]);
         }
     }
-
 }
