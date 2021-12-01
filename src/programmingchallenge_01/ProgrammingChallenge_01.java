@@ -391,35 +391,20 @@ public class ProgrammingChallenge_01 {
         } while (!validMod);
         
         if (mod == 1){ //ADD
-        } else if (mod == 2){ //MODIFY
-            System.out.println("\nNumber of question to modify:");
-            System.out.println();
-            logQuestions(category);
+            System.out.println("Work In PROGRESS!!! O.O");
+        } else if (mod == 2){ //MODIFY 1.QUESTION 2.ANSWER
 
-            Scanner r = new Scanner(System.in);
-            int questionNum = r.nextInt()-1;
+            System.out.println("\nWhat do you want to delate?\n1. Question/s\n2. Answer/s");
+            int whatToModify; 
+            do {
+                Scanner d = new Scanner(System.in);
+                whatToModify = d.nextInt();
+            } while (whatToModify<1 || whatToModify>2);
 
-            System.out.println("Type the new question:");
-            Scanner s = new Scanner(System.in);
-            String newQuestion = s.nextLine();
-            category[0][questionNum] = newQuestion;
-
-            System.out.println("Do you want to modify the answers?\nY/N");
-            Scanner ansModIn = new Scanner(System.in);
-            String answersMod = ansModIn.nextLine().toLowerCase();
-
-            if (answersMod.equals("y")||answersMod.equals("yes")){
-                for (int m = 1; m <= 3; m++){
-                    System.out.println("Type new answer:");
-                    Scanner t = new Scanner(System.in);
-                    String modAnswer = t.nextLine();
-                    userQANDA[m][questionNum] = modAnswer;
-                }
-                System.out.println("Your modifications has been done succesfuly.");
-		    }
-
-        //DELATE 1.QUESTION 2.ANSWER
-        } else if (mod == 3) { //DELATE
+            modify(whatToModify, category);
+           
+        
+        } else if (mod == 3) { //DELATE 1.QUESTION 2.ANSWER
     
             System.out.println("\nWhat do you want to delate?\n1. Question/s\n2. Answer/s");
             int whatToDelate; 
@@ -442,13 +427,82 @@ public class ProgrammingChallenge_01 {
                 logQuestions(category);
                 break;
                 case 2:
-                
                 logQuestions(category);
                 break;
             }  
         }
 		openOptions();
 	}
+
+    public static void modify (int whatToModify, String category [][]) {
+        
+        System.out.println("\nNumber of question to modify:");
+        System.out.println();
+        logQuestions(category);
+
+        int modifyQuestion;
+        do  {   
+            Scanner w = new Scanner(System.in);
+            modifyQuestion = w.nextInt()-1;
+        } while (modifyQuestion < 1 || modifyQuestion > 10);
+        
+        if (whatToModify==1){ //MODIFY QUESTION
+            System.out.println("\nNew question:\n");
+            Scanner s = new Scanner(System.in);
+            String newModQuestion = s.nextLine();
+            category [0][modifyQuestion] = newModQuestion;
+            System.out.println("Question "+modifyQuestion+" has been modified succesfully.\n1");
+
+            System.out.println("\nDo you want to modify another question?\nY/N\n");
+                Scanner d = new Scanner(System.in);
+                String modifyAnotherQuestion = d.nextLine().toLowerCase();
+                if (modifyAnotherQuestion.equals("y") || modifyAnotherQuestion.equals("yes")) {
+                    modify(1,category);
+                } else {
+                    openOptions();
+                }
+
+        } else if (whatToModify==2){ //MODIFY ANSWER
+            Boolean stopModifying = false;
+            modifyAnswer(category, modifyQuestion);
+            
+            while (!stopModifying) {
+                System.out.println("Do you want to modify another answer's question?\nY/N\n");
+                Scanner s = new Scanner(System.in);
+                String answerModifyQ = s.nextLine().toLowerCase();
+
+                if (answerModifyQ.equals("y") || answerModifyQ.equals("yes")) {
+                    System.out.println("Of the same question?\nY/N\n");
+                    Scanner r = new Scanner(System.in);
+                    String delateSameQuestion = r.nextLine().toLowerCase();
+
+                    if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
+                        modifyAnswer(category, modifyQuestion);
+                    } else {
+                        modify(2,category);
+                    }
+                } else {
+                    stopModifying = true;
+                }
+            }
+        }
+        
+    }
+
+    public static void modifyAnswer (String category [][], int row) {
+
+        System.out.println("\nAnswer to modify:\n");
+        logAnswers(category, row);
+        int modifyAnswer;
+        do  {   
+            Scanner s= new Scanner(System.in);
+            modifyAnswer = s.nextInt();
+        } while (modifyAnswer < 1 || modifyAnswer > 10);
+        System.out.println("\nNew answer:\n");
+        Scanner r = new Scanner(System.in);
+        String newModAnswer = r.nextLine();
+        category[modifyAnswer][row] = newModAnswer;
+    }
 
     public static void delate (int whatToDelate, String category [][]){
 
