@@ -301,8 +301,6 @@ public class ProgrammingChallenge_01 {
 				
             }while (!validOption);
 
-            boolean modValidIn = true;
-            int mod=0;
 
             switch(option){ //KEEP PLAYING -- MODS -- EXIT
                 case 1:
@@ -310,7 +308,22 @@ public class ProgrammingChallenge_01 {
                 break;
 
                 case 2:
-                System.out.println(ConsoleColors.YELLOW+"\nSelect your mod:"+ConsoleColors.RESET+"\n1. Modify a quizz\n2. Create a new quizz\n3. Back");
+                modSelection();
+                break;
+
+                case 3:
+                keepPlaying = false;
+                System.out.println("See you next time!");
+                break;
+            }
+			
+	}
+	
+    public static void modSelection () {
+        boolean modValidIn = true;
+        int mod=0;
+
+        System.out.println(ConsoleColors.YELLOW+"\nSelect your mod:"+ConsoleColors.RESET+"\n1. Modify a quizz\n2. Create a new quizz\n3. Back");
                 do {
                     Scanner modIn = new Scanner(System.in);
                     mod = modIn.nextInt();
@@ -320,79 +333,80 @@ public class ProgrammingChallenge_01 {
                         modValidIn = false;
                     }
                 } while (!modValidIn);
-                break;
 
-                case 3:
-                keepPlaying = false;
-                System.out.println("See you next time!");
-                break;
-            }
-            if(mod == 1) { //MOD A CATEGORY
-                System.out.println("\nSelect the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
-                ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
-                ConsoleColors.PURPLE_BOLD_BRIGHT+"\n3."+CAT3+ConsoleColors.RESET);
-                boolean validOptionCat = true;
-                int catOption;
-                do {
-                    Scanner catOptionIn = new Scanner(System.in);
-                    catOption = catOptionIn.nextInt();
-                    if (catOption == 1){
-                        modifications(QANDA1);
-                    }else if (catOption == 2){
-                        modifications(QANDA2);
-                    }else if(catOption == 3){
-                        modifications(QANDA3);
-                    }else{
-                        System.out.println("Error. Invalid input.");
-                        validOption = false;
-                    }
-                } while (!validOptionCat); 
+        if(mod == 1) { //MOD A QUIZZ
+            System.out.println("\nSelect the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
+            ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
+            ConsoleColors.PURPLE_BOLD_BRIGHT+"\n3."+CAT3+ConsoleColors.RESET);
+            boolean validOptionCat = true;
+            int catOption;
 
-            } else if (mod == 2) { //NEW QUIZZ
-                userQANDA = new String [4] [10];
-                System.out.println("\nType of quizz: \n1. Test (a b c) \n2. Multiple answers correct");
-                int typeNewQuizz;
-                do {
-                    Scanner s = new Scanner(System.in);
-                    typeNewQuizz = s.nextInt();
-                } while (typeNewQuizz<1 && typeNewQuizz>2);
+            do {
+                Scanner catOptionIn = new Scanner(System.in);
+                catOption = catOptionIn.nextInt();
+                if (catOption == 1){
+                    modifications(QANDA1);
+                }else if (catOption == 2){
+                    modifications(QANDA2);
+                }else if(catOption == 3){
+                    modifications(QANDA3);
+                }else{
+                    System.out.println("Error. Invalid input.");
+                    validOptionCat = false;
+                }
+            } while (!validOptionCat); 
 
-                    for (int q = 0; q < userQANDA[0].length; q++){
-                        int qn = q+1;
-                        System.out.println("\n\nQuestion nº "+qn+":");
-                        Scanner a = new Scanner(System.in);
-                        String newQuestionArray = a.nextLine();
-                        userQANDA[0][q] = newQuestionArray;
-                        
-                        for (int w = 1; w <= 3;w++){
-                            if (typeNewQuizz==1){    
-                                if(w==1){
-                                    System.out.println("\nType the correct answer:");
-                                }else{
-                                    System.out.println("\nType a false answer:");
-                                }
-                            } else {
-                                System.out.println("Type a possible asnwer:");
+        } else if (mod == 2) { //NEW QUIZZ
+            newQuizz();
+        } else if (mod == 3) { //BACK TO OPTIONS
+            openOptions();
+        }
+    }
+
+    public static void newQuizz () {
+        userQANDA = new String [4] [10];
+            System.out.println(ConsoleColors.YELLOW+"\nType of quizz: \n1. Test (a b c) \n2. Multiple answers correct\n3. Back"+ConsoleColors.RESET);
+            int typeNewQuizz;
+            do {
+                Scanner s = new Scanner(System.in);
+                typeNewQuizz = s.nextInt();
+            } while (typeNewQuizz<1 && typeNewQuizz>3);
+            if (typeNewQuizz==1 || typeNewQuizz==2){
+                for (int q = 0; q < userQANDA[0].length; q++){
+                    int qn = q+1;
+                    System.out.println("\n\nQuestion nº "+qn+":");
+                    Scanner a = new Scanner(System.in);
+                    String newQuestionArray = a.nextLine();
+                    userQANDA[0][q] = newQuestionArray;
+                    
+                    for (int w = 1; w <= 3;w++){
+                        if (typeNewQuizz==1){    
+                            if(w==1){
+                                System.out.println("\nType the correct answer:");
+                            }else{
+                                System.out.println("\nType a false answer:");
                             }
-
-                            Scanner e = new Scanner(System.in);
-                            String userNewArrayAnswer = e.nextLine();
-                            userQANDA[w][q] = userNewArrayAnswer;
+                        } else {
+                            System.out.println("Type a possible asnwer:");
                         }
+
+                        Scanner e = new Scanner(System.in);
+                        String userNewArrayAnswer = e.nextLine();
+                        userQANDA[w][q] = userNewArrayAnswer;
                     }
-                    System.out.println("\nType a new name for your Quizz:\n");
-                    Scanner e = new Scanner(System.in);
-                    String newQuizzName = e.nextLine();
-                    CAT4 = newQuizzName;
+                }
+                System.out.println("\nType a new name for your Quizz:\n");
+                Scanner e = new Scanner(System.in);
+                String newQuizzName = e.nextLine();
+                CAT4 = newQuizzName;
 
-                    System.out.println("Your new Quizz has been created succesfuly.");
-                    openOptions();
+                System.out.println("Your new Quizz has been created succesfuly.");
+                openOptions();
+            } else if (typeNewQuizz == 3) {
+                modSelection();
+            }
+    }
 
-            } else if (mod == 3) { //BACK TO OPTIONS
-				openOptions();
-			}
-	}
-	
 	public static void modifications (String category [][]){
 		System.out.println();
 
