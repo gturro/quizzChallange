@@ -152,6 +152,7 @@ public class ProgrammingChallenge_01 {
 
                 randomGenerated.add(randomQ);
                 //QUESTION PRINT
+            
                 System.out.println(ConsoleColors.CYAN_BOLD+"\n" + cat[0][randomQ]+ConsoleColors.RESET);
                 System.out.println();
                 // RANDOM DISPLAY TIPO TEST
@@ -258,6 +259,8 @@ public class ProgrammingChallenge_01 {
             randomGenerated.clear();
             randomAnswers.clear();
 
+            clear();
+
             // CORRECT INCORRECT SCORE
             int score = extraPoints + normalCorr*VAL_POINTS;
             System.out.println();                  
@@ -305,15 +308,18 @@ public class ProgrammingChallenge_01 {
             switch(option){ //KEEP PLAYING -- MODS -- EXIT
                 case 1:
                 keepPlaying = true;
+                clear();
                 break;
 
                 case 2:
+                clear();
                 modSelection();
                 break;
 
                 case 3:
                 keepPlaying = false;
                 System.out.println("See you next time!");
+                clear();
                 break;
             }
 			
@@ -337,7 +343,8 @@ public class ProgrammingChallenge_01 {
         if(mod == 1) { //MOD A QUIZZ
             System.out.println("\nSelect the category you want to modify:"+ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
             ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
-            ConsoleColors.PURPLE_BOLD_BRIGHT+"\n3."+CAT3+ConsoleColors.RESET);
+            ConsoleColors.PURPLE_BOLD_BRIGHT+"\n3."+CAT3+ConsoleColors.RESET+
+            ConsoleColors.WHITE_BOLD_BRIGHT+"\n4. "+CAT4+ConsoleColors.RESET);
             boolean validOptionCat = true;
             int catOption;
 
@@ -345,10 +352,16 @@ public class ProgrammingChallenge_01 {
                 Scanner catOptionIn = new Scanner(System.in);
                 catOption = catOptionIn.nextInt();
                 if (catOption == 1){
+                    clear();
+                    System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+CAT1+ConsoleColors.RESET);
                     modifications(QANDA1);
                 }else if (catOption == 2){
+                    clear();
+                    System.out.println(ConsoleColors.GREEN_BOLD_BRIGHT+CAT2+ConsoleColors.RESET);
                     modifications(QANDA2);
                 }else if(catOption == 3){
+                    clear();
+                    System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT+CAT3+ConsoleColors.RESET);
                     modifications(QANDA3);
                 }else{
                     System.out.println("Error. Invalid input.");
@@ -357,15 +370,17 @@ public class ProgrammingChallenge_01 {
             } while (!validOptionCat); 
 
         } else if (mod == 2) { //NEW QUIZZ
+            clear();
             newQuizz();
         } else if (mod == 3) { //BACK TO OPTIONS
+            clear();
             openOptions();
         }
     }
 
     public static void newQuizz () {
-        userQANDA = new String [4] [10];
-            System.out.println(ConsoleColors.YELLOW+"\nType of quizz: \n1. Test (a b c) \n2. Multiple answers correct\n3. Back"+ConsoleColors.RESET);
+            userQANDA = new String [4] [10];
+            System.out.println(ConsoleColors.YELLOW+"\nType of quizz:"+ConsoleColors.RESET+"\n1. Test (a b c) \n2. Multiple answers correct\n3. Back");
             int typeNewQuizz;
             do {
                 Scanner s = new Scanner(System.in);
@@ -401,16 +416,19 @@ public class ProgrammingChallenge_01 {
                 CAT4 = newQuizzName;
 
                 System.out.println("Your new Quizz has been created succesfuly.");
+                clear();
                 openOptions();
             } else if (typeNewQuizz == 3) {
+                clear();
                 modSelection();
+                
             }
     }
 
 	public static void modifications (String category [][]){
 		System.out.println();
 
-        System.out.println("Modifications: \n1. Add a question and / or an answer/s \n2. Modify a question and / or an answer/s \n3. Delate a question and / or an asnwer/s");
+        System.out.println(ConsoleColors.YELLOW+"Modifications:"+ConsoleColors.RESET+"\n1. Add a question and / or an answer/s\n2. Modify a question and / or an answer/s\n3. Delate a question and / or an asnwer/s\n4. Back");
         int mod;
         boolean validMod = true;
         do {
@@ -431,7 +449,7 @@ public class ProgrammingChallenge_01 {
                 Scanner d = new Scanner(System.in);
                 whatToModify = d.nextInt();
             } while (whatToModify<1 || whatToModify>2);
-
+            clear();
             modChange(whatToModify, category);
            
         
@@ -445,6 +463,9 @@ public class ProgrammingChallenge_01 {
             } while (whatToDelate<1 || whatToDelate>2);
 
         modDelate(whatToDelate, category); //whatToDelate 1.QUESTIONS 2.ANSWERS
+        }else if (mod == 4){
+        clear();
+        modSelection();
         } else if (mod == 6) { //EG
             System.out.println("\nYou found a esater egg 0.o!\n1. Questions\n2. Answers");
             int easterEgg; 
@@ -463,6 +484,7 @@ public class ProgrammingChallenge_01 {
             }  
         }
 		openOptions();
+        clear();
 	}
 
     public static void modAdd () {
@@ -494,11 +516,13 @@ public class ProgrammingChallenge_01 {
                 if (modifyAnotherQuestion.equals("y") || modifyAnotherQuestion.equals("yes")) {
                     modChange(1,category);
                 } else {
+                    clear();
                     openOptions();
                 }
 
         } else if (whatToModify==2){ //MODIFY ANSWER
             Boolean stopModifying = false;
+            clear();
             changeAnswer(category, modifyQuestion);
             
             while (!stopModifying) {
@@ -512,8 +536,10 @@ public class ProgrammingChallenge_01 {
                     String delateSameQuestion = r.nextLine().toLowerCase();
 
                     if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
+                        clear();
                         changeAnswer(category, modifyQuestion);
                     } else {
+                        clear();
                         modChange(2,category);
                     }
                 } else {
@@ -553,7 +579,7 @@ public class ProgrammingChallenge_01 {
         
         if (whatToDelate==1){ //DELATE QUESTION
             category [0][delateQuestion] = "";
-            System.out.println("Question "+delateQuestion+" has been delated succesfully.\n1");
+            System.out.println("Question "+delateQuestion+" has been delated succesfully.\n");
             System.out.println("\nDo you want to delate another question?\nY/N\n");
                 Scanner d = new Scanner(System.in);
                 String delateAnotherQuestion = d.nextLine().toLowerCase();
@@ -614,5 +640,10 @@ public class ProgrammingChallenge_01 {
         for (int h = 1; h < category.length; h++){
             System.out.println(h+". "+category[h][row]);
         }
+    }
+
+    public static void clear () {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

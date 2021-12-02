@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ProgrammingChallenge_01",
+            "request": "launch",
+            "mainClass": "programmingchallenge_01.ProgrammingChallenge_01",
+            "projectName": "quizzChallange_b70e0f60"
+        },
+        {
+            "type": "java",
             "name": "Launch test",
             "request": "launch",
             "mainClass": "programmingchallenge_01.test",
