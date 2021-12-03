@@ -259,7 +259,7 @@ public class ProgrammingChallenge_01 {
             randomGenerated.clear();
             randomAnswers.clear();
 
-            clear();
+clear();
 
             // CORRECT INCORRECT SCORE
             int score = extraPoints + normalCorr*VAL_POINTS;
