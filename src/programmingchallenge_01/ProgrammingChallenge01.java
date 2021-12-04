@@ -472,8 +472,27 @@ public class ProgrammingChallenge01 {
         }
     
     //1.1 ADD (QUESTION / ANSWERS)
-        public static void modAdd () {
-            
+        public static void modAdd (String category[][]) {
+            System.out.println("\nWhat do you want to add?\n1. Question/s\n2. Answer/s\n3. Back");
+            int whatToModify;
+            do {
+                Scanner d = new Scanner(System.in);
+                whatToModify = d.nextInt();
+            } while (whatToModify<1 || whatToModify>3);
+
+            switch (whatToModify) {
+                case 1:
+
+                break;
+
+                case 2:
+
+                break;
+
+                case 3:
+                modifications(category);
+                break;
+            }
         }
     
     //1.2 CHANGE [QUESTION / ANSWER]
@@ -573,6 +592,14 @@ public class ProgrammingChallenge01 {
             
             if (whatToDelate==1){ //DELATE QUESTION
                 category [0][questionToModify] = "";
+                String qHolder;
+                for (int j = category[0].length; j ==0; j++) {
+                    qHolder =  category[0][j];
+                    if (category[0][j-1].equals("")) {
+                        category[0][j-1] = category[0][j];
+                    }
+                }
+
                 System.out.println("Question "+questionToModify+" has been delated succesfully.\n");
                 System.out.println("\nDo you want to delate another question?\nY/N\n");
                     Scanner d = new Scanner(System.in);
