@@ -164,7 +164,7 @@ public class ProgrammingChallenge01 {
             }
             boolean endGame = false;
 
-            for (int i = 0; i < cat[0].length; i++) {
+            for (int i = cat[0].length-1; i >= 0; i--) {
                 if (!cat[0][i].equals("")){
                     validLength++;
                 }
@@ -592,14 +592,15 @@ public class ProgrammingChallenge01 {
             
             if (whatToDelate==1){ //DELATE QUESTION
                 category [0][questionToModify] = "";
-                String qHolder;
-                for (int j = category[0].length; j ==0; j++) {
-                    qHolder =  category[0][j];
-                    if (category[0][j-1].equals("")) {
-                        category[0][j-1] = category[0][j];
+
+                for (int j = category[0].length-1; j >= 0; j--) {
+                    if (!category[0][j].equals("")){
+                        System.out.println("Index "+j+" has a question");
+                    }else{
+                        System.out.println("Index "+j+" is empty");
+                       
                     }
                 }
-
                 System.out.println("Question "+questionToModify+" has been delated succesfully.\n");
                 System.out.println("\nDo you want to delate another question?\nY/N\n");
                     Scanner d = new Scanner(System.in);
