@@ -1,7 +1,14 @@
-{
+/* {
 
     "version": "0.2.0",
     "configurations": [
+        {
+            "type": "java",
+            "name": "Launch ProgrammingChallenge01",
+            "request": "launch",
+            "mainClass": "programmingchallenge_01.ProgrammingChallenge01",
+            "projectName": "quizzChallange_b70e0f60"
+        },
         {
             "type": "java",
             "name": "Launch ProgrammingChallenge_01",
@@ -30,4 +37,4 @@
             "projectName": "quizzChallange_58937e42"
         }
     ]
-}
+} */
