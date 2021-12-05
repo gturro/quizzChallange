@@ -172,9 +172,9 @@ public class ProgrammingChallenge01 {
             boolean endGame = false;
 
         int validLength=0;
-        //Length with no empty spaces
-            for (int i = 0; i < cat[0].length; i++) {
-                if (!cat[0][i].equals("")){
+            //Length with no empty spaces
+            for (String item : cat[0]) {
+                if (!item.equals("")) {
                     validLength++;
                 }
             }
@@ -258,11 +258,7 @@ public class ProgrammingChallenge01 {
                             validAns = cat[j][randomQ];
                         }
                         
-                        if (validAns.equals(answer)){
-                            itsCorrect = true;
-                        } else {
-                            itsCorrect = false;
-                        }
+                        itsCorrect = validAns.equals(answer);
                     } else {
                         itsCorrect = false;
                     }
@@ -397,22 +393,27 @@ public class ProgrammingChallenge01 {
                         do {
                             Scanner catOptionIn = new Scanner(System.in);
                             catOption = catOptionIn.nextInt();
-                            if (catOption == 1){
+                        switch (catOption) {
+                            case 1:
                                 clear();
                                 System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+CAT1+ConsoleColors.RESET);
                                 modifications(QANDA1);
-                            }else if (catOption == 2){
+                                break;
+                            case 2:
                                 clear();
                                 System.out.println(ConsoleColors.GREEN_BOLD_BRIGHT+CAT2+ConsoleColors.RESET);
                                 modifications(QANDA2);
-                            }else if(catOption == 3){
+                                break;
+                            case 3:
                                 clear();
                                 System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT+CAT3+ConsoleColors.RESET);
                                 modifications(QANDA3);
-                            }else{
+                                break;
+                            default:
                                 System.out.println("Error. Invalid input.");
                                 validOptionCat = false;
-                            }
+                                break;
+                }
                         } while (!validOptionCat);
                         break;
                     case 2:
@@ -503,9 +504,6 @@ public class ProgrammingChallenge01 {
                             Scanner w = new Scanner(System.in);
                             String addQuestion = w.nextLine();
                             category[0][j] = addQuestion;
-                            System.out.println("\nDo you want to add an answer to this question?\nY/N\n");
-                            Scanner f = new Scanner(System.in);
-                            String addAnswer = f.nextLine().toLowerCase();
                 
                             System.out.println("\nDo you want to add another question?\nY/N\n");
                             Scanner d = new Scanner(System.in);
