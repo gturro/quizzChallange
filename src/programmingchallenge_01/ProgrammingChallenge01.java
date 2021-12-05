@@ -69,10 +69,10 @@ public class ProgrammingChallenge01 {
         final static String HIGHANS = "The user answered 100% of the questions correctly.";
 
     //CAT NAME
-        final static String CAT1 = "Arcane serie";
-        final static String CAT2 = "CATEGORY 2";
-        final static String CAT3 = "CATEGORY 3";
-              static String CAT4 = "User Quizz";
+        final static String CAT1 = "Arcane serie Test [abc]";
+        final static String CAT2 = "Random Test [abc]";
+        final static String CAT3 = "Random 3 possible answers";
+              static String CAT4 = "User Quiz";
 
     //NEW USER ARRAY
         static String userQANDA [][] = null;
@@ -110,11 +110,17 @@ public class ProgrammingChallenge01 {
         int consecutiveErrors = 0; 
         int consecutiveCorr = 0;
 
-        int validLength=0;
+        
 
     //QUIZZ GAME
         while (keepPlaying) { // keep playing till 3. Exit game in menu
-        
+            System.out.println("\nHow many questions do you want to answer? Min: 5\n");
+            int answersUserWants, roundsCounter = 0;
+            do {
+                Scanner q = new Scanner(System.in);
+                answersUserWants = q.nextInt();
+            } while (answersUserWants<5);
+
             System.out.println("\n------Select category------"+ 
                 ConsoleColors.BLUE_BOLD_BRIGHT+"\n1."+CAT1+ConsoleColors.RESET+
                 ConsoleColors.GREEN_BOLD_BRIGHT+"\n2."+CAT2+ConsoleColors.RESET+
@@ -165,23 +171,20 @@ public class ProgrammingChallenge01 {
             }
             boolean endGame = false;
 
-<<<<<<< HEAD
+        int validLength=0;
         //Length with no empty spaces
             for (int i = 0; i < cat[0].length; i++) {
-=======
-            for (int i = cat[0].length-1; i >= 0; i--) {
->>>>>>> 67e3ec306af96355ec1e1a8f5d506ae3d85f17bb
                 if (!cat[0][i].equals("")){
                     validLength++;
                 }
             }
 
-            while (!endGame) { // keep playing till 3 consecutive errors
+            while (!endGame) { // keep playing till 3 consecutive errors or answers user wants to answer
 
             // QUESTION RANDOMITZATION
                 do {
                     Random r = new Random();
-                    randomQ=r.nextInt(validLength);
+                    randomQ=r.nextInt(validLength-1);
                 } while (randomGenerated.contains(randomQ));
 
                 randomGenerated.add(randomQ); //add index of question to ArrayList
@@ -195,7 +198,7 @@ public class ProgrammingChallenge01 {
                 String testB="";
                 String testC="";
                
-                while (cat == QANDA1 && randomAnswers.size()<= 2) { //add cat to display test abc.
+                while ((cat == QANDA1 ||cat == QANDA2 )&& randomAnswers.size()<= 2) { //add cat to display test abc.
                     Random r = new Random();
                     int randomA = r.nextInt(3)+1;//genera (0...n-1) +1
 					
@@ -249,7 +252,7 @@ public class ProgrammingChallenge01 {
                 int j = 1;
                 while (j < cat.length && !itsCorrect) {
                     if (!cat[j][randomQ].equals("")) {
-                        if (cat == QANDA1){ //add cat to validate test abc first answers it's the correct one [1].
+                        if (cat == QANDA1 || cat == QANDA2){ //add cat to validate test abc first answers it's the correct one [1].
                             validAns = cat[1][randomQ];
                         }else {
                             validAns = cat[j][randomQ];
@@ -285,15 +288,18 @@ public class ProgrammingChallenge01 {
                     normalCorr -= consecutiveCorr; //we keep the correct answers that aren't consecutive
                     consecutiveCorr = 0;
                 }
-
-            // 3 CONSECUTIVE ERRORS GAME OVER CONDITION
+            roundsCounter++;
+            // GAME OVER CONDITION
                 if (consecutiveErrors >= 3) {
                     endGame = true;
                     clear();
                     System.out.println(ConsoleColors.RED_BRIGHT+"\nYou failed 3 questions in a row..."+ConsoleColors.RESET);
+                }  else if (roundsCounter >= answersUserWants){
+                    endGame = true;
                 } else if (randomGenerated.size()==validLength) {
                     endGame = true;
                 }
+                
             }
             consecutiveErrors = 0;
             randomGenerated.clear();
@@ -478,7 +484,7 @@ public class ProgrammingChallenge01 {
     
     //1.1 ADD (QUESTION / ANSWERS)
         public static void modAdd (String category[][]) {
-                System.out.println("\nWhat do you want to add?\n1. Question/s\n2. Answer/s\n3. Back");
+                System.out.println(ConsoleColors.YELLOW+"\nWhat do you want to add?"+ConsoleColors.RESET+"\n1. Question/s\n2. Answer/s\n3. Back");
                 int whatToModify;
                 do {
                     Scanner d = new Scanner(System.in);
@@ -557,7 +563,7 @@ public class ProgrammingChallenge01 {
     //1.2 CHANGE [QUESTION / ANSWER]
         public static void modChange (String category [][]) {
         
-            System.out.println("\nWhat do you want to change?\n1. Question/s\n2. Answer/s\n3. Back");
+            System.out.println(ConsoleColors.YELLOW+"\nWhat do you want to change?"+ConsoleColors.RESET+"\n1. Question/s\n2. Answer/s\n3. Back");
             int whatToModify = 3;
             int questionToModify=0;
             do {
@@ -635,7 +641,7 @@ public class ProgrammingChallenge01 {
     //1.3 DELATE [QUESTION/ANSWER] mod 2
         public static void modDelate (String category [][]){
 
-            System.out.println("\nWhat do you want to delate?\n1. Question/s\n2. Answer/s\n3. Back");
+            System.out.println(ConsoleColors.YELLOW+"\nWhat do you want to delate?"+ConsoleColors.RESET+"\n1. Question/s\n2. Answer/s\n3. Back");
             int whatToDelate=3;
             int questionToModify=0;
             do {
@@ -656,14 +662,6 @@ public class ProgrammingChallenge01 {
             switch (whatToDelate) { //DELATE QUESTION
                 case 1:
                 category [0][questionToModify] = "";
-<<<<<<< HEAD
-                //String qHolder;
-                for (int j = 0; j < category[0].length-1; j++) {
-                    //qHolder =  category[0][j];
-                    if (category[0][j].equals("") && !category[0][j+1].equals("")) {
-                        category[0][j] = category[0][j+1];
-                        category[0][j+1] = "";
-=======
 
                 for (int j = category[0].length-1; j >= 0; j--) {
                     if (!category[0][j].equals("")){
@@ -671,8 +669,7 @@ public class ProgrammingChallenge01 {
                     }else{
                         System.out.println("Index "+j+" is empty");
                        
->>>>>>> 67e3ec306af96355ec1e1a8f5d506ae3d85f17bb
-                    }
+                  }
                 }
                 System.out.println("Question "+questionToModify+" has been delated succesfully.\n");
                 System.out.println("\nDo you want to delate another question?\nY/N\n");
