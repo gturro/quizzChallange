@@ -165,8 +165,12 @@ public class ProgrammingChallenge01 {
             }
             boolean endGame = false;
 
+<<<<<<< HEAD
         //Length with no empty spaces
             for (int i = 0; i < cat[0].length; i++) {
+=======
+            for (int i = cat[0].length-1; i >= 0; i--) {
+>>>>>>> 67e3ec306af96355ec1e1a8f5d506ae3d85f17bb
                 if (!cat[0][i].equals("")){
                     validLength++;
                 }
@@ -652,12 +656,22 @@ public class ProgrammingChallenge01 {
             switch (whatToDelate) { //DELATE QUESTION
                 case 1:
                 category [0][questionToModify] = "";
+<<<<<<< HEAD
                 //String qHolder;
                 for (int j = 0; j < category[0].length-1; j++) {
                     //qHolder =  category[0][j];
                     if (category[0][j].equals("") && !category[0][j+1].equals("")) {
                         category[0][j] = category[0][j+1];
                         category[0][j+1] = "";
+=======
+
+                for (int j = category[0].length-1; j >= 0; j--) {
+                    if (!category[0][j].equals("")){
+                        System.out.println("Index "+j+" has a question");
+                    }else{
+                        System.out.println("Index "+j+" is empty");
+                       
+>>>>>>> 67e3ec306af96355ec1e1a8f5d506ae3d85f17bb
                     }
                 }
                 System.out.println("Question "+questionToModify+" has been delated succesfully.\n");
