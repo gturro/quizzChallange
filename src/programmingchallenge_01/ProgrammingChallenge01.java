@@ -13,53 +13,54 @@ public class ProgrammingChallenge01 {
                                             "Who saved Jayce and her mother when he was a little boy?",
                                             "Wich character have a pocket watch?",
                                             "Witch Jinx's weapons use the gemstone to upgrade it's power?",
-                                            "What adjustment engineer did Jayce and Viktor made to control the Hexcores?",
-                                            "Question 8",
-                                            "Question 9",
-                                            "Question 10",
+                                            "What engineer adjustment  did Jayce and Viktor made to control the Hexcores?",
+                                            "What was Jinx's name when she was little?",
+                                            "Who is the surfer who appears in the dock?",
+                                            "Who is the singer of the closing song of Arcane Series?",
                                             "",
                                             "",
                                             "",
                                             ""},
-              /* quizz 1 correct answers */ {"(Portal)??", "Noxia", "Shimmer", "Ryze", "Ekko", "FishBones", "High frequency stabilization", "yes", "yes", "no", "", "", "", ""},
-                                            {"(Hoverboards)??" , "Zaun", "3??", "Viktor", "Jayce", "Pow-pow" ,"Highest power supply ", "8", "9", "10", "", "", "", ""},
-                                            {"()??", "Demacia", "c??", "Galio", "Heimerdinger", "Zaap", "The right reflective mirrors", "h", "i", "j", "", "", "", ""}};
+              /* quizz 1 correct answers */ {"The portal", "Noxia", "Shimmer", "Ryze", "Ekko", "FishBones", "High frequency stabilization", "Powder", "Ekko", "Sting", "", "", "", ""},
+                                            {"Hoverboards" , "Zaun", "Powder", "Viktor", "Jayce", "Pow-pow" ,"Highest power supply ", "Little Jinx", "Heimerdinger", "Dan Reynolds", "", "", "", ""},
+                                            {"Blitzcrank", "Demacia", "Zhun", "Galio", "Heimerdinger", "Zaap", "The right reflective mirrors", "Anne", "Talyia", "Dua Lipa", "", "", "", ""}};
     //CATEGORY 2
-        final static String QANDA2 [][] = {{"Question 1.2", 
-                                            "Question 2.2",
-                                            "Question 3.2",
-                                            "Question 4.2",
-                                            "Question 5.2",
-                                            "Question 6.2",
-                                            "Question 7.2",
-                                            "Question 8.2",
-                                            "Question 9.2",
-                                            "Question 10.2",
+        final static String QANDA2 [][] = {{"What is actually electricity?", 
+                                            "Which did Viking people use as money?",
+                                            "What was the first country to use tanks in combat during World War I?",
+                                            "What is the main component of the sun?",
+                                            "Which two months are named after Emperors of the Roman Empire?",
+                                            "Which of the following animals can run the fastest?",
+                                            "In which country is Transylvania?",
+                                            "Which company is known for publishing the Mario video game?",
+                                            "Which was the first film by Disney to be produced in colour?",
+                                            "How many time zones are there in total in the world?",
                                             "",
                                             "",
                                             "",
                                             ""},
-                                            {"yes", "no", "no", "yes", "no", "yes", "no", "yes", "yes", "no", "", "", "", ""},
-                                            {"1" , "2", "3", "4", "5", "6" ,"7", "8", "9", "10", "", "", "", ""},
-                                            {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "", "", "", ""}};
+                /*correct */                {"A flow of electrons", "Jewellery", "Britain", "Gas", "July and August", "Cheetah", "Romania", "Nintendo", "Snow White and the Seven Dwarfs", "24", "", "", "", ""},
+                                            {"A flow of atoms" , "Rune stones", "Germany", "Molten iron", "January and February", "Leopard" ,"Bulgaria", "Electronic Arts", "Cinderella", "32", "", "", "", ""},
+                                            {"A flow of water", "Seal skins", "Japan", "Liquid lava", "May and June", "Tiger", "Croatia", "SEGA", "Sleeping Beauty", "8", "", "", "", ""}};
     //CATEGORY 3
-        final static String QANDA3 [][] = {{"Question 1.3", 
-                                            "Question 2.3",
-                                            "Question 3.3",
-                                            "Question 4.3",
-                                            "Question 5.3",
-                                            "Question 6.3",
-                                            "Question 7.3",
-                                            "Question 8.3",
-                                            "Question 9.3",
-                                            "Question 10.3",
+        final static String QANDA3 [][] = {{"What is the name of SpaceX rocket engine?", 
+                                            "What's the name of one of Elon Musk's companys?",
+                                            "Can you name an actor or actress who played in Matrix?",
+                                            "Can you name one of the Lockheed Martin combat jets?",
+                                            "What's the name of a famous Catalan dish ",
+                                            "Wich SpaceX starship prototype did fly?",
+                                            "Name an actor who played in a Tarantino movie who won an Oscar",
+                                            "Name one of Picasso paintings",
+                                            "Wich are the besat IDE for Java?",
+                                            "Wich singer has colab with Arianna Grande?",
                                             "",
                                             "",
                                             "",
                                             ""},
-                                            {"yes", "no", "no", "yes", "no", "yes", "no", "yes", "yes", "no", "", "", "", ""},
-                                            {"1" , "2", "3", "4", "5", "6" ,"7", "8", "9", "10", "", "", "", ""},
-                                            {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "", "", "", ""}};
+                                            {"raptor", "tesla", "keanu reeves", "f 16", "crema catalana", "sn15", "lionardo di caprio", "guernica", "netbeans", "the weekend", "", "", "", ""},
+                                            {"merlin" , "boring company", "laurence fishburne", "f 22", "pa amb tomaquet", "sn16" ,"christoph waltz", "the old guitarist", "visual studio code", "mac miller", "", "", "", ""},
+                                            {"kestrel", "spacex", "carrie anne moss", "blackbird", "paella", "sn8", "uma thurman", "the weeping woman", "intelj", "nicki minaj", "", "", "", ""},
+                                            {"", "", "", "", "", "", "", "", "", "", "", "", "", ""}};
 
 	//PERCENTAGE 
         final static String LOWANS = "The user answered from  0% to 33% of the questions correctly.";
@@ -164,7 +165,12 @@ public class ProgrammingChallenge01 {
             }
             boolean endGame = false;
 
+<<<<<<< HEAD
+        //Length with no empty spaces
+            for (int i = 0; i < cat[0].length; i++) {
+=======
             for (int i = cat[0].length-1; i >= 0; i--) {
+>>>>>>> 67e3ec306af96355ec1e1a8f5d506ae3d85f17bb
                 if (!cat[0][i].equals("")){
                     validLength++;
                 }
@@ -173,7 +179,6 @@ public class ProgrammingChallenge01 {
             while (!endGame) { // keep playing till 3 consecutive errors
 
             // QUESTION RANDOMITZATION
-            
                 do {
                     Random r = new Random();
                     randomQ=r.nextInt(validLength);
@@ -189,6 +194,7 @@ public class ProgrammingChallenge01 {
                 String testA="";
                 String testB="";
                 String testC="";
+               
                 while (cat == QANDA1 && randomAnswers.size()<= 2) { //add cat to display test abc.
                     Random r = new Random();
                     int randomA = r.nextInt(3)+1;//genera (0...n-1) +1
@@ -237,22 +243,23 @@ public class ProgrammingChallenge01 {
                     answer = "no";
 
                 boolean itsCorrect = false;
-                String validAns; // holder of correct answers
-                boolean correctAns = false;
+                String validAns=""; // holder of correct answers
 
                 // ANS VALIDATION
                 int j = 1;
-                while (j < cat.length && !correctAns) {
-
-                    if (cat == QANDA1){ //add cat to validate test abc first answers answers correct [1].
-                        validAns = cat[1][randomQ];
-                    }else{
-                        validAns = cat[j][randomQ];
-                    }
-                    
-                    if (validAns.equals(answer)){
-                        itsCorrect = true;
-                        correctAns = true;
+                while (j < cat.length && !itsCorrect) {
+                    if (!cat[j][randomQ].equals("")) {
+                        if (cat == QANDA1){ //add cat to validate test abc first answers it's the correct one [1].
+                            validAns = cat[1][randomQ];
+                        }else {
+                            validAns = cat[j][randomQ];
+                        }
+                        
+                        if (validAns.equals(answer)){
+                            itsCorrect = true;
+                        } else {
+                            itsCorrect = false;
+                        }
                     } else {
                         itsCorrect = false;
                     }
@@ -260,7 +267,7 @@ public class ProgrammingChallenge01 {
                 }
 	
             // CORRECT
-                if (itsCorrect){ // a lot of var??
+                if (itsCorrect){ 
                     System.out.println("\nCorrect!");
                     correctCount++;
                     normalCorr++;//all corrects ++ normalCorr
@@ -433,7 +440,7 @@ public class ProgrammingChallenge01 {
                 switch (mod) {
                     case 1:
                         //ADD
-                        System.out.println("Work In PROGRESS!!! O.O");
+                        modAdd(category);
                         break;
                     case 2:
                         //CHANGE 1.QUESTION 2.ANSWER
@@ -463,9 +470,7 @@ public class ProgrammingChallenge01 {
                             case 2:
                                 logQuestions(category);
                                 break;
-                        }       break;
-                    default:
-                        break;
+                        }       
                 }
         openOptions();
                     clear();
@@ -473,48 +478,104 @@ public class ProgrammingChallenge01 {
     
     //1.1 ADD (QUESTION / ANSWERS)
         public static void modAdd (String category[][]) {
-            System.out.println("\nWhat do you want to add?\n1. Question/s\n2. Answer/s\n3. Back");
-            int whatToModify;
-            do {
-                Scanner d = new Scanner(System.in);
-                whatToModify = d.nextInt();
-            } while (whatToModify<1 || whatToModify>3);
+                System.out.println("\nWhat do you want to add?\n1. Question/s\n2. Answer/s\n3. Back");
+                int whatToModify;
+                do {
+                    Scanner d = new Scanner(System.in);
+                    whatToModify = d.nextInt();
+                } while (whatToModify<1 || whatToModify>3);
 
-            switch (whatToModify) {
-                case 1:
+                switch (whatToModify) {
+                    case 1:
+                    boolean thereIsEmptyQ = false;
+                    boolean noMoreQ = false;
+                    int j = 0;
+                    while (!noMoreQ && j < category[0].length ){
+                        if (category[0][j].equals("")) {
+                            thereIsEmptyQ = true;
+                            System.out.println("T\nType your new question:");
+                            Scanner w = new Scanner(System.in);
+                            String addQuestion = w.nextLine();
+                            category[0][j] = addQuestion;
+                            System.out.println("\nDo you want to add an answer to this question?\nY/N\n");
+                            Scanner f = new Scanner(System.in);
+                            String addAnswer = f.nextLine().toLowerCase();
+                
+                            System.out.println("\nDo you want to add another question?\nY/N\n");
+                            Scanner d = new Scanner(System.in);
+                            String modifyAnotherQuestion = d.nextLine().toLowerCase();
+                                if (modifyAnotherQuestion.equals("n") || modifyAnotherQuestion.equals("no")) {
+                                    noMoreQ = true;
+                                }
+                        }
+                        j++;
+                    }
+                    if (thereIsEmptyQ){
+                        System.out.println("Your new question has been added succesfully.\n");
+                    }else{
+                        System.out.println("Full questions. Delate some to add new ones.");
+                    }
+                    openOptions();
+                    break;
 
-                break;
+                    case 2:
+                        System.out.println("\nSelect the question wich you'll add a new answer:");
+                        System.out.println();
+                        logQuestions(category);
+                        int questionAddAnswer;
+                        boolean thereIsEmptyA = false;
+                        do  {   
+                            Scanner w = new Scanner(System.in);
+                            questionAddAnswer = w.nextInt()-1;
+                        } while (questionAddAnswer < 1 || questionAddAnswer > category[0].length);
 
-                case 2:
+                        for (int k = 1; k < 4; k++) {
+                            if (category[k][questionAddAnswer].equals("")) {
+                                thereIsEmptyA = true;
+                                System.out.println("\nType your new answer:");
+                                Scanner w = new Scanner(System.in);
+                                String addAnswer = w.nextLine();
+                                category[0][k] = addAnswer;
+                            }   
+                        }
+                        if (thereIsEmptyA){
+                            System.out.println("Your new answer has been added succesfully.\n");
+                            
+                        }else {
+                            System.out.println("Full answers. Delate some to add new ones.");
+                        }
+                        openOptions();
+                    break;
 
-                break;
-
-                case 3:
-                modifications(category);
-                break;
-            }
+                    case 3:
+                    modifications(category);
+                    break;
+                }
+                
         }
     
     //1.2 CHANGE [QUESTION / ANSWER]
         public static void modChange (String category [][]) {
         
             System.out.println("\nWhat do you want to change?\n1. Question/s\n2. Answer/s\n3. Back");
-            int whatToModify;
+            int whatToModify = 3;
+            int questionToModify=0;
             do {
                 Scanner d = new Scanner(System.in);
                 whatToModify = d.nextInt();
             } while (whatToModify<1 || whatToModify>3);
 
-            System.out.println("\nNumber of question to modify:");
-            System.out.println();
-            logQuestions(category);
+            if (whatToModify==1||whatToModify==2){
+                System.out.println("\nNumber of question to modify:");
+                System.out.println();
+                logQuestions(category);
 
-            int questionToModify;
-            do  {   
-                Scanner w = new Scanner(System.in);
-                questionToModify = w.nextInt()-1;
-            } while (questionToModify < 1 || questionToModify > 10);
-
+                
+                do  {   
+                    Scanner w = new Scanner(System.in);
+                    questionToModify = w.nextInt()-1;
+                } while (questionToModify <= 0 || questionToModify > category[0].length);
+            }
         
             switch (whatToModify) { 
             //CHANGE QUESTION
@@ -523,7 +584,7 @@ public class ProgrammingChallenge01 {
                 Scanner s = new Scanner(System.in);
                 String changedQuestion = s.nextLine();
                 category [0][questionToModify] = changedQuestion;
-                System.out.println("Question "+questionToModify+" has been modified succesfully.\n1");
+                System.out.println("Question "+questionToModify+" has been modified succesfully.\n");
 
                 System.out.println("\nDo you want to modify another question?\nY/N\n");
                     Scanner d = new Scanner(System.in);
@@ -574,24 +635,35 @@ public class ProgrammingChallenge01 {
     //1.3 DELATE [QUESTION/ANSWER] mod 2
         public static void modDelate (String category [][]){
 
-            System.out.println("\nWhat do you want to delate?\n1. Question/s\n2. Answer/s");
-            int whatToDelate;
+            System.out.println("\nWhat do you want to delate?\n1. Question/s\n2. Answer/s\n3. Back");
+            int whatToDelate=3;
+            int questionToModify=0;
             do {
                 Scanner d = new Scanner(System.in);
                 whatToDelate = d.nextInt();
-            } while (whatToDelate<1 || whatToDelate>2);
-            System.out.println("\nNumber of question to delate:");
-            System.out.println();
-            logQuestions(category);
+            } while (whatToDelate<1 || whatToDelate>3);
+            if ( whatToDelate==1 || whatToDelate==2){
+                System.out.println("\nNumber of question to delate:");
+                System.out.println();
+                logQuestions(category);
 
-            int questionToModify;
-            do  {   
-                Scanner w = new Scanner(System.in);
-                questionToModify = w.nextInt();
-            } while (questionToModify < 1 || questionToModify > 10);
-            
-            if (whatToDelate==1){ //DELATE QUESTION
+                
+                do  {   
+                    Scanner w = new Scanner(System.in);
+                    questionToModify = w.nextInt()-1;
+                } while (questionToModify <= 0 || questionToModify > category[0].length);
+            }
+            switch (whatToDelate) { //DELATE QUESTION
+                case 1:
                 category [0][questionToModify] = "";
+<<<<<<< HEAD
+                //String qHolder;
+                for (int j = 0; j < category[0].length-1; j++) {
+                    //qHolder =  category[0][j];
+                    if (category[0][j].equals("") && !category[0][j+1].equals("")) {
+                        category[0][j] = category[0][j+1];
+                        category[0][j+1] = "";
+=======
 
                 for (int j = category[0].length-1; j >= 0; j--) {
                     if (!category[0][j].equals("")){
@@ -599,6 +671,7 @@ public class ProgrammingChallenge01 {
                     }else{
                         System.out.println("Index "+j+" is empty");
                        
+>>>>>>> 67e3ec306af96355ec1e1a8f5d506ae3d85f17bb
                     }
                 }
                 System.out.println("Question "+questionToModify+" has been delated succesfully.\n");
@@ -610,11 +683,12 @@ public class ProgrammingChallenge01 {
                     } else {
                         openOptions();
                     }
+                break;
 
-            } else if (whatToDelate==2){ //DELATE ANSWER
+                case 2://DELATE ANSWER
                 Boolean stopDelate = false;
                 modifyAnswer(category, questionToModify, 2);
-                
+                //MORE
                 while (!stopDelate) {
                     System.out.println("Do you want to delate another answer?\nY/N\n");
                     Scanner s = new Scanner(System.in);
@@ -625,14 +699,20 @@ public class ProgrammingChallenge01 {
                         Scanner r = new Scanner(System.in);
                         String delateSameQuestion = r.nextLine().toLowerCase();
                         if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
+                            clear();
                             modifyAnswer(category, questionToModify, 2);
                         } else {
+                            clear();
                             modDelate(category);
                         }
                     } else {
                         stopDelate = true;
                     }
                 }
+                break;
+                case 3:
+                modifications(category);
+                break;
             }
         }
   
@@ -643,6 +723,8 @@ public class ProgrammingChallenge01 {
                 case 1: toDo = "change";
                 break;
                 case 2: toDo = "delate";
+                break;
+                case 3: toDo = "add";
                 break;
             }
             System.out.println("\nAnswer to "+toDo+":");
@@ -663,6 +745,13 @@ public class ProgrammingChallenge01 {
                 case 2: //DELATE
                     category[modifyAnswer][row] = "";
                 break;
+                case 3:
+                    System.out.println("\nAdd answer:\n");
+                    Scanner g = new Scanner(System.in);
+                    String addAnswer = g.nextLine();
+                    category[modifyAnswer][row] = addAnswer;
+                break;
+
             }
         }    
 
@@ -722,10 +811,11 @@ public class ProgrammingChallenge01 {
 
 //eg log
     public static void logQuestions (String category [][]){
-
         for (int j= 0; j < category[0].length; j++){
             int k = j+1;
-            System.out.println(k+". "+category[0][j]);
+            if (!category[0][j].equals("")){
+                System.out.println(k+". "+category[0][j]);
+            }
         }
     }
 
