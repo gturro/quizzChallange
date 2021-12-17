@@ -445,17 +445,15 @@ public class ProgrammingChallenge01 {
             } while (!validMod);
             
                 switch (mod) {
-                    case 1:
-                        //ADD
+                    case 1: //ADD
+                        
                         modAdd(category);
                         break;
-                    case 2:
-                        //CHANGE 1.QUESTION 2.ANSWER
-                        modChange(category);
+                    case 2: //CHANGE 
+                        modChaDel(category,0);
                         break;
-                    case 3:
-                        //DELATE 1.QUESTION 2.ANSWER
-                        modDelate(category); 
+                    case 3:  //DELATE
+                        modChaDel(category,1); 
                         break;
                     case 4:
                         clear();
@@ -493,61 +491,47 @@ public class ProgrammingChallenge01 {
                 } while (whatToModify<1 || whatToModify>3);
 
                 switch (whatToModify) {
-                    case 1:
-                    boolean thereIsEmptyQ = false;
-                    boolean noMoreQ = false;
-                    int j = 0;
-                    while (!noMoreQ && j < category[0].length ){
-                        if (category[0][j].equals("")) {
-                            thereIsEmptyQ = true;
-                            System.out.println("T\nType your new question:");
-                            Scanner w = new Scanner(System.in);
-                            String addQuestion = w.nextLine();
-                            category[0][j] = addQuestion;
-                
-                            System.out.println("\nDo you want to add another question?\nY/N\n");
-                            Scanner d = new Scanner(System.in);
-                            String modifyAnotherQuestion = d.nextLine().toLowerCase();
-                                if (modifyAnotherQuestion.equals("n") || modifyAnotherQuestion.equals("no")) {
-                                    noMoreQ = true;
-                                }
+                    case 1: //Question
+                        boolean thereIsEmptyQ = false;
+                        boolean noMoreQ = false;
+                        int j = 0;
+                        while (!noMoreQ && j < category[0].length ){
+                            if (category[0][j].equals("")) {
+                                thereIsEmptyQ = true;
+                                System.out.println("T\nType your new question:");
+                                Scanner w = new Scanner(System.in);
+                                String addQuestion = w.nextLine();
+                                category[0][j] = addQuestion;
+                    
+                                System.out.println("\nDo you want to add another question?\nY/N\n");
+                                Scanner d = new Scanner(System.in);
+                                String modifyAnotherQuestion = d.nextLine().toLowerCase();
+                                    if (modifyAnotherQuestion.equals("n") || modifyAnotherQuestion.equals("no")) {
+                                        noMoreQ = true;
+                                    }
+                            }
+                            j++;
                         }
-                        j++;
-                    }
-                    if (thereIsEmptyQ){
-                        System.out.println("Your new question has been added succesfully.\n");
-                    }else{
-                        System.out.println("Full questions. Delate some to add new ones.");
-                    }
-                    openOptions();
+                        if (thereIsEmptyQ){
+                            System.out.println("Your new question has been added succesfully.\n");
+                        }else{
+                            System.out.println("Full questions. Delate some to add new ones.");
+                        }
+                        openOptions();
                     break;
 
-                    case 2:
+                    case 2: //Answers
                         System.out.println("\nSelect the question wich you'll add a new answer:");
                         System.out.println();
                         logQuestions(category);
                         int questionAddAnswer;
-                        boolean thereIsEmptyA = false;
+                        
                         do  {   
                             Scanner w = new Scanner(System.in);
                             questionAddAnswer = w.nextInt()-1;
                         } while (questionAddAnswer < 1 || questionAddAnswer > category[0].length);
 
-                        for (int k = 1; k < 4; k++) {
-                            if (category[k][questionAddAnswer].equals("")) {
-                                thereIsEmptyA = true;
-                                System.out.println("\nType your new answer:");
-                                Scanner w = new Scanner(System.in);
-                                String addAnswer = w.nextLine();
-                                category[0][k] = addAnswer;
-                            }   
-                        }
-                        if (thereIsEmptyA){
-                            System.out.println("Your new answer has been added succesfully.\n");
-                            
-                        }else {
-                            System.out.println("Full answers. Delate some to add new ones.");
-                        }
+                        modifyAnswer(category, questionAddAnswer, 2);
                         openOptions();
                     break;
 
@@ -558,9 +542,9 @@ public class ProgrammingChallenge01 {
                 
         }
     
-    //1.2 CHANGE [QUESTION / ANSWER]
+    /* //1.2 CHANGE [QUESTION / ANSWER]
         public static void modChange (String category [][]) {
-        
+        //switch ()
             System.out.println(ConsoleColors.YELLOW+"\nWhat do you want to change?"+ConsoleColors.RESET+"\n1. Question/s\n2. Answer/s\n3. Back");
             int whatToModify = 3;
             int questionToModify=0;
@@ -581,8 +565,7 @@ public class ProgrammingChallenge01 {
                 } while (questionToModify <= 0 || questionToModify > category[0].length);
             }
         
-            switch (whatToModify) { 
-            //CHANGE QUESTION
+            switch (whatToModify) { //CHANGE QUESTION
                 case 1:
                 System.out.println("\nNew question:\n");
                 Scanner s = new Scanner(System.in);
@@ -634,9 +617,102 @@ public class ProgrammingChallenge01 {
                 break;
                 }
             
-        }
+        } */
   
-    //1.3 DELATE [QUESTION/ANSWER] mod 2
+        public static void modChaDel (String category[][], int modType) { //modType 0=change 1=delate
+            String modName = "";
+            switch (modType){
+                case 0:
+                modName="change";
+                break;
+                case 1:
+                modName = "delate";
+                break;
+            }
+
+            System.out.println(ConsoleColors.YELLOW+"\nWhat do you want to "+modName+"?"+ConsoleColors.RESET+"\n1. Question/s\n2. Answer/s\n3. Back");
+            int whatToModify = 3;
+            int questionToModify=0;
+            do {
+                Scanner d = new Scanner(System.in);
+                whatToModify = d.nextInt();
+            } while (whatToModify<1 || whatToModify>3);
+
+            if (whatToModify==1||whatToModify==2){
+                System.out.println("\nNumber of question to "+modName+":");
+                System.out.println();
+                logQuestions(category);
+    
+                do  {   
+                    Scanner w = new Scanner(System.in);
+                    questionToModify = w.nextInt()-1;
+                } while (questionToModify <= 0 || questionToModify > category[0].length);
+            }
+        
+            switch (whatToModify) { 
+                case 1:
+                    if(modType==0){ //MOD QUIESTION              
+                        System.out.println("\nNew question:\n");
+                        Scanner s = new Scanner(System.in);
+                        String changedQuestion = s.nextLine();
+                        category [0][questionToModify] = changedQuestion;
+                        System.out.println("Question "+questionToModify+" has been modified succesfully.\n");
+                    } 
+                        else if(modType==1){ //DELATE QUESTION
+                        category [0][questionToModify] = "";
+                        for (int j = category[0].length-1; j >= 0; j--) {
+                            if (!category[0][j].equals("")){ //NOT FINISHED!!!!
+                                System.out.println("Index "+j+" has a question"); //NOT FINISHED!!!!
+                            }else{
+                                System.out.println("Index "+j+" is empty"); //NOT FINISHED!!!!
+                            }
+                         }
+                    }
+                    System.out.println("\nDo you want to "+modName+" another question?\nY/N\n");
+                    Scanner d = new Scanner(System.in);
+                    String modifyAnotherQuestion = d.nextLine().toLowerCase();
+                    
+                    if (modifyAnotherQuestion.equals("y") || modifyAnotherQuestion.equals("yes")) {
+                        modChaDel(category,modType);
+                    } else {
+                        clear();
+                        openOptions();
+                    }
+                break;
+
+                case 2: //MOD ANSWER   
+                Boolean stopModifying = false;
+                clear();
+                modifyAnswer(category, questionToModify, 1);
+                //MORE 
+                while (!stopModifying) {
+                    System.out.println("Do you want to "+modName+" another answer's question?\nY/N\n");
+                    Scanner g = new Scanner(System.in);
+                    String answerModifyQ = g.nextLine().toLowerCase();
+
+                    if (answerModifyQ.equals("y") || answerModifyQ.equals("yes")) {
+                        System.out.println("Of the same question?\nY/N\n");
+                        Scanner r = new Scanner(System.in);
+                        String delateSameQuestion = r.nextLine().toLowerCase();
+
+                        if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
+                            clear();
+                            modifyAnswer(category, questionToModify, modType);
+                        } else {
+                            clear();
+                            modChaDel(category, modType);
+                        }
+                    } else {
+                        stopModifying = true;
+                    }
+                }
+                break;
+                case 3:
+                modifications(category);
+                break;
+                }
+        }
+   /*  //1.3 DELATE [QUESTION/ANSWER] mod 2
         public static void modDelate (String category [][]){
 
             System.out.println(ConsoleColors.YELLOW+"\nWhat do you want to delate?"+ConsoleColors.RESET+"\n1. Question/s\n2. Answer/s\n3. Back");
@@ -646,6 +722,7 @@ public class ProgrammingChallenge01 {
                 Scanner d = new Scanner(System.in);
                 whatToDelate = d.nextInt();
             } while (whatToDelate<1 || whatToDelate>3);
+
             if ( whatToDelate==1 || whatToDelate==2){
                 System.out.println("\nNumber of question to delate:");
                 System.out.println();
@@ -657,12 +734,13 @@ public class ProgrammingChallenge01 {
                     questionToModify = w.nextInt()-1;
                 } while (questionToModify <= 0 || questionToModify > category[0].length);
             }
+
             switch (whatToDelate) { //DELATE QUESTION
                 case 1:
                 category [0][questionToModify] = "";
 
                 for (int j = category[0].length-1; j >= 0; j--) {
-                    if (!category[0][j].equals("")){
+                    if (!category[0][j].equals("")){ //NOT FINISHED!!!!
                         System.out.println("Index "+j+" has a question");
                     }else{
                         System.out.println("Index "+j+" is empty");
@@ -676,12 +754,14 @@ public class ProgrammingChallenge01 {
                     if (delateAnotherQuestion.equals("y") || delateAnotherQuestion.equals("yes")) {
                         modDelate(category);
                     } else {
+                        clear();
                         openOptions();
                     }
                 break;
 
                 case 2://DELATE ANSWER
                 Boolean stopDelate = false;
+                clear();
                 modifyAnswer(category, questionToModify, 2);
                 //MORE
                 while (!stopDelate) {
@@ -709,44 +789,57 @@ public class ProgrammingChallenge01 {
                 modifications(category);
                 break;
             }
-        }
+        } */
   
     // 1.2.1 / 1.3.1 MODIFY ANSWER
-        public static void modifyAnswer(String category [][], int row, int modType) {
+        public static void modifyAnswer(String category [][], int row, int modType) { //modType 0=change 1=delate 2=add
             String toDo = "modify";
-            switch (modType){
-                case 1: toDo = "change";
-                break;
-                case 2: toDo = "delate";
-                break;
-                case 3: toDo = "add";
-                break;
-            }
-            System.out.println("\nAnswer to "+toDo+":");
-            logAnswers(category, row);
-            int modifyAnswer;
-            do  {   
-                Scanner s= new Scanner(System.in);
-                modifyAnswer = s.nextInt();
-            } while (modifyAnswer < 1 || modifyAnswer > 10);
+            int modifyAnswer=0;
 
             switch (modType){
-                case 1: //CHANGE
+                case 0: toDo = "change"; 
+                    System.out.println("\nAnswer to "+toDo+":");
+                    logAnswers(category, row);
+
+                    do  {   
+                        Scanner s= new Scanner(System.in);
+                        modifyAnswer = s.nextInt();
+                    } while (modifyAnswer < 1 || modifyAnswer > 10);
+
                     System.out.println("\nNew answer:\n");
                     Scanner r = new Scanner(System.in);
                     String newModAnswer = r.nextLine();
                     category[modifyAnswer][row] = newModAnswer;
                 break;
-                case 2: //DELATE
+                case 1: toDo = "delate";
+                    System.out.println("\nAnswer to "+toDo+":");
+                    logAnswers(category, row);
+                    do  {   
+                        Scanner s= new Scanner(System.in);
+                        modifyAnswer = s.nextInt();
+                    } while (modifyAnswer < 1 || modifyAnswer > 10);
                     category[modifyAnswer][row] = "";
-                break;
-                case 3:
-                    System.out.println("\nAdd answer:\n");
-                    Scanner g = new Scanner(System.in);
-                    String addAnswer = g.nextLine();
-                    category[modifyAnswer][row] = addAnswer;
-                break;
 
+                   
+                break;
+                case 2: toDo = "add";
+                boolean thereIsEmptyA = false;
+                for (int k = 1; k < 4; k++) {
+                    if (category[k][row].equals("")) {
+                        thereIsEmptyA = true;
+                        System.out.println("\nType your new answer:");
+                        Scanner w = new Scanner(System.in);
+                        String addAnswer = w.nextLine();
+                        category[0][k] = addAnswer;
+                    }   
+                }
+                if (thereIsEmptyA){
+                    System.out.println("Your new answer has been added succesfully.\n");
+                    
+                }else {
+                    System.out.println("Full answers. Delate some to add new ones.");
+                }
+                break;
             }
         }    
 
