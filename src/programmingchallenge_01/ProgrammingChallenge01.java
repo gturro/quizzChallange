@@ -447,13 +447,13 @@ public class ProgrammingChallenge01 {
                 switch (mod) {
                     case 1: //ADD
                         
-                        modAdd(category);
+                        modChaDelAdd(category, 2);
                         break;
                     case 2: //CHANGE 
-                        modChaDel(category,0);
+                        modChaDelAdd(category,0);
                         break;
                     case 3:  //DELATE
-                        modChaDel(category,1); 
+                        modChaDelAdd(category,1); 
                         break;
                     case 4:
                         clear();
@@ -541,85 +541,8 @@ public class ProgrammingChallenge01 {
                 }
                 
         }
-    
-    /* //1.2 CHANGE [QUESTION / ANSWER]
-        public static void modChange (String category [][]) {
-        //switch ()
-            System.out.println(ConsoleColors.YELLOW+"\nWhat do you want to change?"+ConsoleColors.RESET+"\n1. Question/s\n2. Answer/s\n3. Back");
-            int whatToModify = 3;
-            int questionToModify=0;
-            do {
-                Scanner d = new Scanner(System.in);
-                whatToModify = d.nextInt();
-            } while (whatToModify<1 || whatToModify>3);
-
-            if (whatToModify==1||whatToModify==2){
-                System.out.println("\nNumber of question to modify:");
-                System.out.println();
-                logQuestions(category);
-
-                
-                do  {   
-                    Scanner w = new Scanner(System.in);
-                    questionToModify = w.nextInt()-1;
-                } while (questionToModify <= 0 || questionToModify > category[0].length);
-            }
-        
-            switch (whatToModify) { //CHANGE QUESTION
-                case 1:
-                System.out.println("\nNew question:\n");
-                Scanner s = new Scanner(System.in);
-                String changedQuestion = s.nextLine();
-                category [0][questionToModify] = changedQuestion;
-                System.out.println("Question "+questionToModify+" has been modified succesfully.\n");
-
-                System.out.println("\nDo you want to modify another question?\nY/N\n");
-                    Scanner d = new Scanner(System.in);
-                    String modifyAnotherQuestion = d.nextLine().toLowerCase();
-                    
-                    if (modifyAnotherQuestion.equals("y") || modifyAnotherQuestion.equals("yes")) {
-                        modChange(category);
-                    } else {
-                        clear();
-                        openOptions();
-                    }
-                break;
-            //CHANGE ANSWER    
-                case 2:
-                Boolean stopModifying = false;
-                clear();
-                modifyAnswer(category, questionToModify, 1);
-                //MORE 
-                while (!stopModifying) {
-                    System.out.println("Do you want to change another answer's question?\nY/N\n");
-                    Scanner g = new Scanner(System.in);
-                    String answerModifyQ = g.nextLine().toLowerCase();
-
-                    if (answerModifyQ.equals("y") || answerModifyQ.equals("yes")) {
-                        System.out.println("Of the same question?\nY/N\n");
-                        Scanner r = new Scanner(System.in);
-                        String delateSameQuestion = r.nextLine().toLowerCase();
-
-                        if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
-                            clear();
-                            modifyAnswer(category, questionToModify, 1);
-                        } else {
-                            clear();
-                            modChange(category);
-                        }
-                    } else {
-                        stopModifying = true;
-                    }
-                }
-                break;
-                case 3:
-                modifications(category);
-                break;
-                }
-            
-        } */
-  
-        public static void modChaDel (String category[][], int modType) { //modType 0=change 1=delate
+      
+        public static void modChaDelAdd (String category[][], int modType) { //modType 0=change 1=delate 2=add
             String modName = "";
             switch (modType){
                 case 0:
@@ -627,6 +550,9 @@ public class ProgrammingChallenge01 {
                 break;
                 case 1:
                 modName = "delate";
+                break;
+                case 2:
+                modName = "add";
                 break;
             }
 
@@ -673,7 +599,7 @@ public class ProgrammingChallenge01 {
                     String modifyAnotherQuestion = d.nextLine().toLowerCase();
                     
                     if (modifyAnotherQuestion.equals("y") || modifyAnotherQuestion.equals("yes")) {
-                        modChaDel(category,modType);
+                        modChaDelAdd(category,modType);
                     } else {
                         clear();
                         openOptions();
@@ -683,7 +609,7 @@ public class ProgrammingChallenge01 {
                 case 2: //MOD ANSWER   
                 Boolean stopModifying = false;
                 clear();
-                modifyAnswer(category, questionToModify, 1);
+                modifyAnswer(category, questionToModify, modType);
                 //MORE 
                 while (!stopModifying) {
                     System.out.println("Do you want to "+modName+" another answer's question?\nY/N\n");
@@ -700,7 +626,7 @@ public class ProgrammingChallenge01 {
                             modifyAnswer(category, questionToModify, modType);
                         } else {
                             clear();
-                            modChaDel(category, modType);
+                            modChaDelAdd(category, modType);
                         }
                     } else {
                         stopModifying = true;
@@ -712,84 +638,6 @@ public class ProgrammingChallenge01 {
                 break;
                 }
         }
-   /*  //1.3 DELATE [QUESTION/ANSWER] mod 2
-        public static void modDelate (String category [][]){
-
-            System.out.println(ConsoleColors.YELLOW+"\nWhat do you want to delate?"+ConsoleColors.RESET+"\n1. Question/s\n2. Answer/s\n3. Back");
-            int whatToDelate=3;
-            int questionToModify=0;
-            do {
-                Scanner d = new Scanner(System.in);
-                whatToDelate = d.nextInt();
-            } while (whatToDelate<1 || whatToDelate>3);
-
-            if ( whatToDelate==1 || whatToDelate==2){
-                System.out.println("\nNumber of question to delate:");
-                System.out.println();
-                logQuestions(category);
-
-                
-                do  {   
-                    Scanner w = new Scanner(System.in);
-                    questionToModify = w.nextInt()-1;
-                } while (questionToModify <= 0 || questionToModify > category[0].length);
-            }
-
-            switch (whatToDelate) { //DELATE QUESTION
-                case 1:
-                category [0][questionToModify] = "";
-
-                for (int j = category[0].length-1; j >= 0; j--) {
-                    if (!category[0][j].equals("")){ //NOT FINISHED!!!!
-                        System.out.println("Index "+j+" has a question");
-                    }else{
-                        System.out.println("Index "+j+" is empty");
-                       
-                  }
-                }
-                System.out.println("Question "+questionToModify+" has been delated succesfully.\n");
-                System.out.println("\nDo you want to delate another question?\nY/N\n");
-                    Scanner d = new Scanner(System.in);
-                    String delateAnotherQuestion = d.nextLine().toLowerCase();
-                    if (delateAnotherQuestion.equals("y") || delateAnotherQuestion.equals("yes")) {
-                        modDelate(category);
-                    } else {
-                        clear();
-                        openOptions();
-                    }
-                break;
-
-                case 2://DELATE ANSWER
-                Boolean stopDelate = false;
-                clear();
-                modifyAnswer(category, questionToModify, 2);
-                //MORE
-                while (!stopDelate) {
-                    System.out.println("Do you want to delate another answer?\nY/N\n");
-                    Scanner s = new Scanner(System.in);
-                    String answerDelateQ = s.nextLine().toLowerCase();
-
-                    if (answerDelateQ.equals("y") || answerDelateQ.equals("yes")) {
-                        System.out.println("Of the same question?\nY/N\n");
-                        Scanner r = new Scanner(System.in);
-                        String delateSameQuestion = r.nextLine().toLowerCase();
-                        if (delateSameQuestion.equals("y") || delateSameQuestion.equals("yes")) {
-                            clear();
-                            modifyAnswer(category, questionToModify, 2);
-                        } else {
-                            clear();
-                            modDelate(category);
-                        }
-                    } else {
-                        stopDelate = true;
-                    }
-                }
-                break;
-                case 3:
-                modifications(category);
-                break;
-            }
-        } */
   
     // 1.2.1 / 1.3.1 MODIFY ANSWER
         public static void modifyAnswer(String category [][], int row, int modType) { //modType 0=change 1=delate 2=add
